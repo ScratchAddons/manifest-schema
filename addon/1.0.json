@@ -116,20 +116,24 @@
 			}
 		},
 		"credits": {
-			"type": "object",
+			"type": "array",
 			"description": "", "$comment": "TODO",
-			"properties": {
-				"name": {
-					"type": "string",
-					"description": "", "$comment": "TODO"
-				 },
-				"link": {
-					"type": "string",
-					"description": "", "$comment": "TODO",
-					"pattern": "", "$comment": "TODO"
-				}
-			},
-			"required": ["name"]
+			"items": {
+				"type": "object",
+				"description": "", "$comment": "TODO",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "", "$comment": "TODO"
+					 },
+					"link": {
+						"type": "string",
+						"description": "", "$comment": "TODO",
+						"pattern": "", "$comment": "TODO"
+					}
+				},
+				"required": ["name"]
+			}
 		},
 		"enabled_by_default": {
 			"type": "boolean",
