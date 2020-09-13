@@ -1,0 +1,141 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "http://example.com/",
+	"title": "Scratch Addons addon manifest/metadata",
+	"description": "",
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "The name of the addon. Don't make it too long."
+		},
+		"description": {
+			"type": "string",
+			"description": "The description of the addons. Any credits and attributions also belong here."
+		},
+		"tags": {
+			"type": "array",
+			"description": "Tags which are used for filtering and badges on the Scratch Addons settings page.",
+			"items": {
+				"type": "string",
+				"description": "", "$comment": "TODO",
+				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
+			}
+		},
+		"permissions": {
+			"type": "array",
+			"description": "You can specify permissions by providing a `permissions` array.",
+			"items": {
+				"type": "string",
+				"description": "", "$comment": "TODO",
+				"enum": ["notifications", "badge"]
+			}
+		},
+		"persistent_scripts": {
+			"type": "array",
+			"description": "",
+			"items": {
+					"type": "string",
+				"description": "", "$comment": "TODO",
+				"pattern": "", "$comment": "TODO"
+			}
+		},
+		"userscripts": {
+			"type": "array",
+			"description": "You can add userscripts by providing a `userscripts` array.\nUnlike persistent scripts, this is an array of objects, not strings.\nEach object must specify the url to the userscript through the `url` property, and provide an array of URL matches.",
+			"items": {
+					"type": "object",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "", "$comment": "TODO"
+					 },
+					"matches": {
+						"type": "array",
+						"description": "", "$comment": "TODO",
+						"items": {
+							"type": "string",
+							"description": "", "$comment": "TODO"
+						}
+					},
+					"runAtComplete": {
+						"type": "boolean",
+						"description": "", "$comment": "TODO"
+					}
+				},
+				"required": ["url", "matches"], "$comment": "TODO: runAtComplete?"
+			}
+		},
+		"userstyles": {
+			"type": "array",
+			"description": "Similarly to userscripts, you can specify a `userstyles` array.\nEach object must specify the url to the stylesheet through the `url` property, and provide an array of URL matches.",
+			"items": {
+					"type": "object",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "", "$comment": "TODO"
+					 },
+					"matches": {
+						"type": "array",
+						"description": "", "$comment": "TODO",
+						"items": {
+							"type": "string",
+							"description": "", "$comment": "TODO"
+						}
+					}
+				},
+				"required": ["url", "matches"]
+			}
+		},
+		"options": {
+			"type": "array",
+			"description": "Similarly to userscripts, you can specify a `userstyles` array.\nEach object must specify the url to the stylesheet through the `url` property, and provide an array of URL matches.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "", "$comment": "TODO"
+					 },
+					"id": {
+						"type": "string",
+						"description": "", "$comment": "TODO"
+					},
+					"type": {
+						"type": "string",
+						"description": "", "$comment": "TODO",
+						"enum": ["boolean", "positive_integer"], "$comment": "TODO: more support as in #142?"
+					},
+					"default": {
+						"type": ["boolean", "integer"], "$comment": "TODO: more support as in #142?",
+						"description": "", "$comment": "TODO"
+					}
+				},
+				"required": ["name", "id", "type", "default"]
+			}
+		},
+		"credits": {
+			"type": "object",
+			"description": "", "$comment": "TODO",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "", "$comment": "TODO"
+				 },
+				"link": {
+					"type": "string",
+					"description": "", "$comment": "TODO",
+					"pattern": "", "$comment": "TODO"
+				}
+			},
+			"required": ["name"]
+		},
+		"enabled_by_default": {
+			"type": "boolean",
+			"description": "", "$comment": "TODO",
+			"default": false
+		}
+	},
+	"required": ["name", "description", "tags"]
+}
