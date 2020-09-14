@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://github.com/Hans5958/ScratchAddons-Schemas/raw/master/addon/1.0.json",
+	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.0.json",
 	"title": "Scratch Addons addon manifest/metadata",
 	"description": "",
 	"type": "object",
