@@ -20,7 +20,8 @@
 				"type": "string",
 				"description": "", "$comment": "TODO",
 				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
-			}
+			},
+            "minItems": 1
 		},
 		"permissions": {
 			"type": "array",
@@ -29,7 +30,8 @@
 				"type": "string",
 				"description": "", "$comment": "TODO",
 				"enum": ["notifications", "badge"]
-			}
+			},
+            "minItems": 1
 		},
 		"persistent_scripts": {
 			"type": "array",
@@ -38,13 +40,14 @@
 				"type": "string",
 				"description": "", "$comment": "TODO",
 				"pattern": "", "$comment": "TODO"
-			}
+			},
+            "minItems": 1
 		},
 		"userscripts": {
 			"type": "array",
 			"description": "You can add userscripts by providing a `userscripts` array.\nUnlike persistent scripts, this is an array of objects, not strings.\nEach object must specify the url to the userscript through the `url` property, and provide an array of URL matches.",
 			"items": {
-					"type": "object",
+                "type": "object",
 				"properties": {
 					"url": {
 						"type": "string",
@@ -64,13 +67,14 @@
 					}
 				},
 				"required": ["url", "matches"], "$comment": "TODO: runAtComplete?"
-			}
+			},
+            "minItems": 1
 		},
 		"userstyles": {
 			"type": "array",
 			"description": "Similarly to userscripts, you can specify a `userstyles` array.\nEach object must specify the url to the stylesheet through the `url` property, and provide an array of URL matches.",
 			"items": {
-					"type": "object",
+                "type": "object",
 				"properties": {
 					"url": {
 						"type": "string",
@@ -86,7 +90,8 @@
 					}
 				},
 				"required": ["url", "matches"]
-			}
+			},
+            "minItems": 1
 		},
 		"options": {
 			"type": "array",
@@ -113,7 +118,8 @@
 					}
 				},
 				"required": ["name", "id", "type", "default"]
-			}
+			},
+            "minItems": 1
 		},
 		"credits": {
 			"type": "array",
@@ -133,7 +139,8 @@
 					}
 				},
 				"required": ["name"]
-			}
+			},
+            "minItems": 1
 		},
 		"enabled_by_default": {
 			"type": "boolean",
