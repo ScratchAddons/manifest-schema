@@ -35,7 +35,7 @@
 			"type": "array",
 			"description": "",
 			"items": {
-					"type": "string",
+				"type": "string",
 				"description": "", "$comment": "TODO",
 				"pattern": "", "$comment": "TODO"
 			}
@@ -105,10 +105,10 @@
 					"type": {
 						"type": "string",
 						"description": "", "$comment": "TODO",
-						"enum": ["boolean", "positive_integer"], "$comment": "TODO: more support as in #142?"
+						"enum": ["boolean", "positive_integer", "string"], "$comment": "TODO: more support as in #142?"
 					},
 					"default": {
-						"type": ["boolean", "integer"], "$comment": "TODO: more support as in #142?",
+						"type": ["boolean", "integer", "string"], "$comment": "TODO: more support as in #142?",
 						"description": "", "$comment": "TODO"
 					}
 				},
