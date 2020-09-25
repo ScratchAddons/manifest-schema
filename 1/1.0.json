@@ -1,8 +1,8 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.0.json",
-	"title": "Scratch Addons addon manifest/metadata",
-	"description": "",
+	"title": "Scratch Addons addon manifest",
+	"description": "The manifest that describes an addon.",
 	"type": "object",
 	"properties": {
 		"name": {
@@ -18,7 +18,7 @@
 			"description": "Tags which are used for filtering and badges on the Scratch Addons settings page.",
 			"items": {
 				"type": "string",
-				"description": "", "$comment": "TODO",
+				"description": "A tag",
 				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
 			},
             "minItems": 1
@@ -28,7 +28,7 @@
 			"description": "You can specify permissions by providing a `permissions` array.",
 			"items": {
 				"type": "string",
-				"description": "", "$comment": "TODO",
+				"description": "A permission.",
 				"enum": ["notifications", "badge", "clipboardWrite"]
 			},
             "minItems": 1
@@ -51,22 +51,23 @@
 				"properties": {
 					"url": {
 						"type": "string",
-						"description": "", "$comment": "TODO"
-					 },
+						"description": "The URL/path to the userscript."
+					},
 					"matches": {
 						"type": "array",
-						"description": "", "$comment": "TODO",
+						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
 						"items": {
 							"type": "string",
-							"description": "", "$comment": "TODO"
+							"description": "An URL match rule."
 						}
 					},
 					"runAtComplete": {
 						"type": "boolean",
-						"description": "", "$comment": "TODO"
+						"description": ""
 					}
 				},
-				"required": ["url", "matches"]
+				"required": ["url", "matches"],
+				"additionalProperties": false
 			},
             "minItems": 1
 		},
@@ -78,18 +79,19 @@
 				"properties": {
 					"url": {
 						"type": "string",
-						"description": "", "$comment": "TODO"
-					 },
+						"description": "The URL/path to the userstyle."
+					},
 					"matches": {
 						"type": "array",
-						"description": "", "$comment": "TODO",
+						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.", "$comment": "TODO",
 						"items": {
 							"type": "string",
-							"description": "", "$comment": "TODO"
+							"description": "An URL match rule."
 						}
 					}
 				},
-				"required": ["url", "matches"]
+				"required": ["url", "matches"],
+				"additionalProperties": false
 			},
             "minItems": 1
 		},
@@ -101,23 +103,22 @@
 				"properties": {
 					"name": {
 						"type": "string",
-						"description": "", "$comment": "TODO"
+						"description": "The name of the option."
 					 },
 					"id": {
 						"type": "string",
-						"description": "", "$comment": "TODO"
+						"description": "The identifier of the option."
 					},
 					"type": {
 						"type": "string",
-						"description": "", "$comment": "TODO",
+						"description": "The type of the option",
 						"enum": ["boolean", "positive_integer", "string", "select"], "$comment": "TODO: more support as in #142?"
 					},
 					"default": {
 						"type": ["boolean", "integer", "string"], "$comment": "TODO: more support as in #142?",
-						"description": "", "$comment": "TODO"
+						"description": "The default value of the option."
 					}
 				},
-				"required": ["name", "id", "type", "default"],
                 "if": {
                     "properties": { 
                         "type": { 
@@ -129,44 +130,48 @@
                     "properties": { 
                         "potential_values": { 
                             "type": "array",
-                            "description": "", "$comment": "TODO",
+                            "description": "The potential values for the select option.",
                             "items": {
                                 "type": "string",
-                                "description": "", "$comment": "TODO"
+                                "description": "A potential value for the select option."
                             }
                         } 
                     },
                     "required": ["potential_values"]
-                }
+				},
+				"required": ["name", "id", "type", "default"],
+				"additionalProperties": false
 			},
             "minItems": 1
 		},
 		"credits": {
 			"type": "array",
-			"description": "", "$comment": "TODO",
+			"description": "An array containing credits to the authors/contributors of the addon.",
 			"items": {
 				"type": "object",
-				"description": "", "$comment": "TODO",
+				"description": "A credited author/contributor.",
 				"properties": {
 					"name": {
 						"type": "string",
-						"description": "", "$comment": "TODO"
+						"description": "The name of the credited person."
 					 },
 					"link": {
 						"type": "string",
-						"description": "", "$comment": "TODO",
-						"pattern": "", "$comment": "TODO"
+						"description": "The link relevant to the credit.",
+						"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
 					}
 				},
-				"required": ["name"]
+				"required": ["name"],
+				"additionalProperties": false
 			},
             "minItems": 1
 		},
 		"enabled_by_default": {
 			"type": "boolean",
-			"description": "", "$comment": "TODO",
+			"description": "A boolean to determine whether the addon should be enabled by default or not.",
 			"default": false
 		}
 	},
-	"required": ["name", "description", "tags"]
+	"required": ["name", "description", "tags"],
+	"additionalProperties": false
 }
