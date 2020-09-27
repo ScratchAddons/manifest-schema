@@ -1,10 +1,14 @@
-{
+sol{
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.0.json",
 	"title": "Scratch Addons addon manifest",
 	"description": "The manifest that describes an addon.",
 	"type": "object",
 	"properties": {
+		"$schema": {
+			"type": "string",
+			"description": "The URL to the schema."
+		},
 		"name": {
 			"type": "string",
 			"description": "The name of the addon. Don't make it too long."
@@ -25,7 +29,7 @@
 		},
 		"permissions": {
 			"type": "array",
-			"description": "You can specify permissions by providing a `permissions` array.",
+			"description": "You can specify permissions by providing a \"permissions\" array.",
 			"items": {
 				"type": "string",
 				"description": "A permission.",
@@ -35,23 +39,24 @@
 		},
 		"persistent_scripts": {
 			"type": "array",
-			"description": "",
+			"description": "You can add persistent scripts by providing a \"persistent_scripts\" array conformed of JS files (e.g. [\"example.js\"]).",
 			"items": {
 				"type": "string",
-				"description": "", "$comment": "TODO",
-				"pattern": "", "$comment": "TODO"
+				"description": "The path to the persistent script.",
+				"pattern": "\\.js$"
 			},
             "minItems": 1
 		},
 		"userscripts": {
 			"type": "array",
-			"description": "You can add userscripts by providing a `userscripts` array.\nUnlike persistent scripts, this is an array of objects, not strings.\nEach object must specify the url to the userscript through the `url` property, and provide an array of URL matches.",
+			"description": "You can add userscripts by providing a \"userscripts\" array.\nUnlike persistent scripts, this is an array of objects, not strings.\nEach object must specify the url to the userscript through the \"url\" property, and provide an array of URL matches.",
 			"items": {
                 "type": "object",
 				"properties": {
 					"url": {
 						"type": "string",
-						"description": "The URL/path to the userscript."
+						"description": "The path to the userscript.",
+						"pattern": "\\.js$"
 					},
 					"matches": {
 						"type": "array",
@@ -63,7 +68,21 @@
 					},
 					"runAtComplete": {
 						"type": "boolean",
-						"description": ""
+						"description": "Determines whether the addon should be run after the document is complete loading."
+					},
+					"setting_match": {
+						"type": "object",
+						"description": "You can provide a \"setting_match\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
+						"properties": {
+							"setting_id": {
+								"type": "string",
+								"description": "The identifier of the option."
+							},
+							"setting_value": {
+								"type": ["boolean", "integer", "string"],
+								"description": "The value of the option."
+							}
+						}
 					}
 				},
 				"required": ["url", "matches"],
@@ -73,20 +92,35 @@
 		},
 		"userstyles": {
 			"type": "array",
-			"description": "Similarly to userscripts, you can specify a `userstyles` array.\nEach object must specify the url to the stylesheet through the `url` property, and provide an array of URL matches.",
+			"description": "Similarly to userscripts, you can specify a \"userstyles\" array.\nEach object must specify the url to the stylesheet through the \"url\" property, and provide an array of URL matches.",
 			"items": {
                 "type": "object",
 				"properties": {
 					"url": {
 						"type": "string",
-						"description": "The URL/path to the userstyle."
+						"description": "The path to the userstyle.",
+						"pattern": "\\.css$"
 					},
 					"matches": {
 						"type": "array",
-						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.", "$comment": "TODO",
+						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
 						"items": {
 							"type": "string",
 							"description": "An URL match rule."
+						}
+					},
+					"setting_match": {
+						"type": "object",
+						"description": "You can provide a \"setting_match\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
+						"properties": {
+							"setting_id": {
+								"type": "string",
+								"description": "The identifier of the option."
+							},
+							"setting_value": {
+								"type": ["boolean", "integer", "string"],
+								"description": "The value of the option."
+							}
 						}
 					}
 				},
@@ -97,7 +131,7 @@
 		},
 		"options": {
 			"type": "array",
-			"description": "Similarly to userscripts, you can specify a `userstyles` array.\nEach object must specify the url to the stylesheet through the `url` property, and provide an array of URL matches.",
+			"description": "Options allow the addon's users to specify settings in Scratch Addons' settings panel. Inside your persistent scripts and userscripts, you can then access those settings with the \"addon.settings\" API.\nSpecify an \"options\" property and provide an array of option objects.",
 			"items": {
 				"type": "object",
 				"properties": {
@@ -117,6 +151,14 @@
 					"default": {
 						"type": ["boolean", "integer", "string"], "$comment": "TODO: more support as in #142?",
 						"description": "The default value of the option."
+					},
+					"potential_values": { 
+						"type": "array",
+						"description": "The potential values for the select option.",
+						"items": {
+							"type": "string",
+							"description": "A potential value for the select option."
+						}
 					}
 				},
                 "if": {
@@ -127,16 +169,6 @@
                     }
                 },
                 "then": {
-                    "properties": { 
-                        "potential_values": { 
-                            "type": "array",
-                            "description": "The potential values for the select option.",
-                            "items": {
-                                "type": "string",
-                                "description": "A potential value for the select option."
-                            }
-                        } 
-                    },
                     "required": ["potential_values"]
 				},
 				"required": ["name", "id", "type", "default"],
@@ -168,7 +200,7 @@
 		},
 		"enabled_by_default": {
 			"type": "boolean",
-			"description": "A boolean to determine whether the addon should be enabled by default or not.",
+			"description": "You can provide the \"enabled_by_default\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
 			"default": false
 		}
 	},
