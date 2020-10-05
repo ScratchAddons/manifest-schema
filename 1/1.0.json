@@ -25,7 +25,7 @@
 				"description": "A tag",
 				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"permissions": {
 			"type": "array",
@@ -35,7 +35,7 @@
 				"description": "A permission.",
 				"enum": ["notifications", "badge", "clipboardWrite"]
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"persistent_scripts": {
 			"type": "array",
@@ -45,13 +45,13 @@
 				"description": "The path to the persistent script.",
 				"pattern": "\\.js$"
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"userscripts": {
 			"type": "array",
 			"description": "You can add userscripts by providing a \"userscripts\" array.\nUnlike persistent scripts, this is an array of objects, not strings.\nEach object must specify the url to the userscript through the \"url\" property, and provide an array of URL matches.",
 			"items": {
-                "type": "object",
+				"type": "object",
 				"properties": {
 					"url": {
 						"type": "string",
@@ -88,13 +88,13 @@
 				"required": ["url", "matches"],
 				"additionalProperties": false
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"userstyles": {
 			"type": "array",
 			"description": "Similarly to userscripts, you can specify a \"userstyles\" array.\nEach object must specify the url to the stylesheet through the \"url\" property, and provide an array of URL matches.",
 			"items": {
-                "type": "object",
+				"type": "object",
 				"properties": {
 					"url": {
 						"type": "string",
@@ -127,7 +127,7 @@
 				"required": ["url", "matches"],
 				"additionalProperties": false
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"options": {
 			"type": "array",
@@ -137,19 +137,19 @@
 				"properties": {
 					"name": {
 						"type": "string",
-						"description": "The name of the option."
+						"description": "The name for the option."
 					 },
 					"id": {
 						"type": "string",
-						"description": "The identifier of the option."
+						"description": "The identifier of the option to get the specified value from your code."
 					},
 					"type": {
 						"type": "string",
 						"description": "The type of the option",
-						"enum": ["boolean", "positive_integer", "string", "select"], "$comment": "TODO: more support as in #142?"
+						"enum": ["boolean", "positive_integer", "string", "select"]
 					},
 					"default": {
-						"type": ["boolean", "integer", "string"], "$comment": "TODO: more support as in #142?",
+						"type": ["boolean", "integer", "string"],
 						"description": "The default value of the option."
 					},
 					"potential_values": { 
@@ -161,20 +161,20 @@
 						}
 					}
 				},
-                "if": {
-                    "properties": { 
-                        "type": { 
-                            "const": "select" 
-                        } 
-                    }
-                },
-                "then": {
-                    "required": ["potential_values"]
+				"if": {
+					"properties": { 
+						"type": { 
+							"const": "select" 
+						} 
+					}
+				},
+				"then": {
+					"required": ["potential_values"]
 				},
 				"required": ["name", "id", "type", "default"],
 				"additionalProperties": false
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"credits": {
 			"type": "array",
@@ -196,7 +196,7 @@
 				"required": ["name"],
 				"additionalProperties": false
 			},
-            "minItems": 1
+			"minItems": 1
 		},
 		"enabled_by_default": {
 			"type": "boolean",
