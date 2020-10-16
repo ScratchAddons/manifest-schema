@@ -229,11 +229,11 @@
 		},
 		"warning": {
 			"type": "string",
-			"description": "The warning that will be shown to users when using the addon.", "$comment": "TODO"
+			"description": "The warning that will be shown to users when using the addon."
 		},
 		"traps": {
 			"type": "boolean",
-			"description": "Determines whether traps are needed to run the addon.", "$comment": "TODO"
+			"description": "Determines whether traps are needed to run the addon."
 		}
 	},
 	"required": ["name", "description", "tags"],
