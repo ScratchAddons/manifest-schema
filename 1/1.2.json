@@ -37,7 +37,7 @@
 			},
 			"minItems": 1
 		},
-		"persistent_scripts": {
+		"persistentScripts": {
 			"type": "array",
 			"description": "You can add persistent scripts by providing a \"persistent_scripts\" array conformed of JS files (e.g. [\"example.js\"]).",
 			"items": {
@@ -70,15 +70,15 @@
 						"type": "boolean",
 						"description": "Determines whether the addon should be run after the document is complete loading."
 					},
-					"setting_match": {
+					"settingMatch": {
 						"type": "object",
-						"description": "You can provide a \"setting_match\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
+						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
 						"properties": {
-							"setting_id": {
+							"id": {
 								"type": "string",
 								"description": "The identifier of the option."
 							},
-							"setting_value": {
+							"value": {
 								"type": ["boolean", "integer", "string"],
 								"description": "The value of the option."
 							}
@@ -109,15 +109,15 @@
 							"description": "An URL match rule."
 						}
 					},
-					"setting_match": {
+					"settingMatch": {
 						"type": "object",
 						"description": "You can provide a \"setting_match\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
 						"properties": {
-							"setting_id": {
+							"id": {
 								"type": "string",
 								"description": "The identifier of the option."
 							},
-							"setting_value": {
+							"value": {
 								"type": ["boolean", "integer", "string"],
 								"description": "The value of the option."
 							}
@@ -222,18 +222,18 @@
 			},
 			"minItems": 1
 		},
-		"enabled_by_default": {
+		"enabledByDefault": {
 			"type": "boolean",
 			"description": "You can provide the \"enabled_by_default\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
 			"default": false
 		},
 		"warning": {
 			"type": "string",
-			"description": "The warning that will be shown to users when using the addon.", "$comment": "TODO"
+			"description": "The warning that will be shown to users when using the addon."
 		},
 		"traps": {
 			"type": "boolean",
-			"description": "Determines whether traps are needed to run the addon.", "$comment": "TODO"
+			"description": "Determines whether traps are needed to run the addon."
 		}
 	},
 	"required": ["name", "description", "tags"],
