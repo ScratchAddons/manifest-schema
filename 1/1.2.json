@@ -152,7 +152,7 @@
 						"type": ["boolean", "integer", "string"],
 						"description": "The default value of the option."
 					},
-					"potential_values": {}
+					"potentialValues": {}
 				},
 				"allOf": [
 					{
@@ -165,7 +165,7 @@
 						},
 						"then": {
 							"properties": {
-								"potential_values": {
+								"potentialValues": {
 									"type": "array",
 									"description": "The potential values for the select option.",
 									"items": {
@@ -175,7 +175,7 @@
 									"minItems": 1
 								}
 							},
-							"required": ["potential_values"]
+							"required": ["potentialValues"]
 						}
 					},
 					{
