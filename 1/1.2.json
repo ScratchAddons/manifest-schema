@@ -39,7 +39,7 @@
 		},
 		"persistentScripts": {
 			"type": "array",
-			"description": "You can add persistent scripts by providing a \"persistent_scripts\" array conformed of JS files (e.g. [\"example.js\"]).",
+			"description": "You can add persistent scripts by providing a \"persistentScripts\" array conformed of JS files (e.g. [\"example.js\"]).",
 			"items": {
 				"type": "string",
 				"description": "The path to the persistent script.",
@@ -111,7 +111,7 @@
 					},
 					"settingMatch": {
 						"type": "object",
-						"description": "You can provide a \"setting_match\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
+						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
 						"properties": {
 							"id": {
 								"type": "string",
@@ -224,7 +224,7 @@
 		},
 		"enabledByDefault": {
 			"type": "boolean",
-			"description": "You can provide the \"enabled_by_default\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
+			"description": "You can provide the \"enabledByDefault\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
 			"default": false
 		},
 		"warning": {
