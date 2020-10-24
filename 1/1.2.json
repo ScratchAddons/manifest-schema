@@ -234,6 +234,10 @@
 		"traps": {
 			"type": "boolean",
 			"description": "Determines whether traps are needed to run the addon."
+		},
+		"notice": {
+			"type": "string",
+			"description": "The notice that will be shown to users when using the addon."
 		}
 	},
 	"required": ["name", "description", "tags"],
