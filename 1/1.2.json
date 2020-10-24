@@ -153,10 +153,15 @@
 						"description": "The default value of the option."
 					},
 					"presets": {
-						"type": ["boolean", "integer", "string"],
-						"description": "The presets of the option."
+						"type": "object",
+						"patternProperties": {
+							".": {
+								"type": ["boolean", "integer", "string"],
+								"description": "The value of the preset."
+							}
+						},
+						"description": "The presets for the setting."
 					},
-
 					"potentialValues": {}
 				},
 				"allOf": [
