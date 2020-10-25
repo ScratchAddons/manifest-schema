@@ -152,16 +152,6 @@
 						"type": ["boolean", "integer", "string"],
 						"description": "The default value of the option."
 					},
-					"presets": {
-						"type": "object",
-						"patternProperties": {
-							".": {
-								"type": ["boolean", "integer", "string"],
-								"description": "The value of the preset."
-							}
-						},
-						"description": "The presets for the setting."
-					},
 					"potentialValues": {}
 				},
 				"allOf": [
@@ -259,9 +249,13 @@
 					"name": {
 						"type": "string",
 						"description": "The name of the preset."
+					},
+					"values": {
+						"type": "object",
+						"description": "An object property list of settings ids, and their values \"id\": \"value\""
 					}
 				},
-				"required": ["name"],
+				"required": ["name", "id"],
 				"additionalProperties": false
 			},
 			"minItems": 1
