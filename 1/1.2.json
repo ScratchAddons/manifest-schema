@@ -153,14 +153,6 @@
 						"description": "The default value of the option."
 					},
 					"presets": {
-						"type": "object",
-						"patternProperties": {
-							".": {
-								"type": ["boolean", "integer", "string"],
-								"description": "The value of the preset."
-							}
-						},
-						"description": "The presets for the setting."
 					},
 					"potentialValues": {}
 				},
@@ -246,25 +238,6 @@
 			"description": "Determines whether traps are needed to run the addon."
 		},
 		"presets": {
-			"type": "array",
-			"description": "An array containing presets for settings.",
-			"items": {
-				"type": "object",
-				"description": "A preset.",
-				"properties": {
-					"id": {
-						"type": "string",
-						"description": "The identifier of the preset."
-					 },
-					"name": {
-						"type": "string",
-						"description": "The name of the preset."
-					}
-				},
-				"required": ["name"],
-				"additionalProperties": false
-			},
-			"minItems": 1
 		},
 		"notice": {
 			"type": "string",
