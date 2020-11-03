@@ -11,11 +11,13 @@
 		},
 		"name": {
 			"type": "string",
-			"description": "The name of the addon. Don't make it too long."
+			"description": "The name of the addon. Don't make it too long.",
+			"minLength": 1
 		},
 		"description": {
 			"type": "string",
-			"description": "The description of the addons. Any credits and attributions also belong here."
+			"description": "The description of the addons. Any credits and attributions also belong here.",
+			"minLength": 1
 		},
 		"tags": {
 			"type": "array",
@@ -63,8 +65,10 @@
 						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
 						"items": {
 							"type": "string",
-							"description": "An URL match rule."
-						}
+							"description": "An URL match rule.",
+							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
+						},
+						"minItems": 1
 					},
 					"runAtComplete": {
 						"type": "boolean",
@@ -72,15 +76,15 @@
 					},
 					"settingMatch": {
 						"type": "object",
-						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
+						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified setting is set to the specified value.",
 						"properties": {
 							"id": {
 								"type": "string",
-								"description": "The identifier of the option."
+								"description": "The identifier of the setting."
 							},
 							"value": {
 								"type": ["boolean", "integer", "string"],
-								"description": "The value of the option."
+								"description": "The value of the setting."
 							}
 						}
 					}
@@ -106,20 +110,23 @@
 						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
 						"items": {
 							"type": "string",
-							"description": "An URL match rule."
+							"description": "An URL match rule.",
+							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
 						}
 					},
 					"settingMatch": {
 						"type": "object",
-						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified option is set to the specified value.",
+						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified setting is set to the specified value.",
 						"properties": {
 							"id": {
 								"type": "string",
-								"description": "The identifier of the option."
+								"description": "The identifier of the setting.",
+								"minLength": 1
 							},
 							"value": {
 								"type": ["boolean", "integer", "string"],
-								"description": "The value of the option."
+								"description": "The value of the setting.",
+								"minLength": 1
 							}
 						}
 					}
@@ -131,26 +138,30 @@
 		},
 		"settings": {
 			"type": "array",
-			"description": "Options allow the addon's users to specify settings in Scratch Addons' settings panel. Inside your persistent scripts and userscripts, you can then access those settings with the \"addon.settings\" API.\nSpecify an \"options\" property and provide an array of option objects.",
+			"description": "The \"settings\" object allow the addon's users to specify settings in Scratch Addons' settings panel. Inside your persistent scripts and userscripts, you can then access those settings with the \"addon.settings\" API.\nSpecify an \"settings\" property and provide an array of setting objects.",
 			"items": {
 				"type": "object",
 				"properties": {
 					"name": {
 						"type": "string",
-						"description": "The name for the option."
+						"description": "The name for the setting.",
+						"minLength": 1
 					},
 					"id": {
 						"type": "string",
-						"description": "The identifier of the option to get the specified value from your code."
+						"description": "The identifier of the setting to get the specified value from your code.",
+						"minLength": 1
 					},
 					"type": {
 						"type": "string",
-						"description": "The type of the option",
-						"enum": ["boolean", "positive_integer", "string", "select", "color"]
+						"description": "The type of the setting",
+						"enum": ["boolean", "positive_integer", "string", "select", "color"],
+						"minLength": 1
 					},
 					"default": {
 						"type": ["boolean", "integer", "string"],
-						"description": "The default value of the option."
+						"description": "The default value of the setting.",
+						"minLength": 1
 					},
 					"potentialValues": {}
 				},
@@ -167,10 +178,10 @@
 							"properties": {
 								"potentialValues": {
 									"type": "array",
-									"description": "The potential values for the select option.",
+									"description": "The potential values for the select setting.",
 									"items": {
 										"type": "string",
-										"description": "A potential value for the select option."
+										"description": "A potential value for the select setting."
 									},
 									"minItems": 1
 								},
@@ -208,7 +219,8 @@
 						"then": {
 							"properties": {
 								"default": {
-									"type": "integer"
+									"type": "integer",
+									"minimum": 1
 								}
 							}
 						}
@@ -224,7 +236,8 @@
 						"then": {
 							"properties": {
 								"default": {
-									"type": "string"
+									"type": "string",
+									"minLength": 1
 								}
 							}
 						}
@@ -261,7 +274,8 @@
 				"properties": {
 					"name": {
 						"type": "string",
-						"description": "The name of the credited person."
+						"description": "The name of the credited person.",
+						"minLength": 1
 					},
 					"link": {
 						"type": "string",
@@ -281,11 +295,13 @@
 		},
 		"warning": {
 			"type": "string",
-			"description": "The warning that will be shown to users when using the addon."
+			"description": "The warning that will be shown to users when using the addon.",
+			"minLength": 1
 		},
 		"traps": {
 			"type": "boolean",
-			"description": "Determines whether traps are needed to run the addon."
+			"description": "Determines whether traps are needed to run the addon.",
+			"minLength": 1
 		},
 		"presets": {
 			"type": "array",
@@ -294,27 +310,36 @@
 				"type": "object",
 				"description": "A preset.",
 				"properties": {
-					"id": {
-						"type": "string",
-						"description": "The identifier of the preset."
-					 },
 					"name": {
 						"type": "string",
-						"description": "The name of the preset."
+						"description": "The name of the preset.",
+						"minLength": 1
 					},
+					"id": {
+						"type": "string",
+						"description": "The identifier of the preset.",
+						"minLength": 1
+					 },
 					"values": {
 						"type": "object",
-						"description": "An object property list of settings ids, and their values \"id\": \"value\""
+						"description": "An object containing preset values of the settings.",
+						"patternProperties": {
+							".": {
+								"description": "The preset value of the setting.",
+								"type": ["boolean", "integer", "string"]
+							}
+						}
 					}
 				},
-				"required": ["name", "id"],
+				"required": ["name", "id", "values"],
 				"additionalProperties": false
 			},
 			"minItems": 1
 		},
 		"notice": {
 			"type": "string",
-			"description": "The notice that will be shown to users when using the addon."
+			"description": "The notice that will be shown to users when using the addon.",
+			"minLength": 1
 		}
 	},
 	"required": ["name", "description", "tags"],
