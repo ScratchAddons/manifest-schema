@@ -320,6 +320,11 @@
 						"description": "The identifier of the preset.",
 						"minLength": 1
 					 },
+					"description": {
+						"type": "string",
+						"description": "The description of the preset.",
+						"minLength": 1
+					 },
 					"values": {
 						"type": "object",
 						"description": "An object containing preset values of the settings.",
