@@ -345,6 +345,10 @@
 			"type": "string",
 			"description": "The notice that will be shown to users when using the addon.",
 			"minLength": 1
+		},
+		"l10n": {
+			"type": "boolean",
+			"description": "Determines whether the addon should be localized."
 		}
 	},
 	"required": ["name", "description", "tags"],
