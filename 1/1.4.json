@@ -379,6 +379,16 @@
 			"type": "boolean",
 			"description": "Determines whether localization (l10n) files of the addon are loaded.",
 			"default": false
+		},
+		"libraries": {
+			"type": "array",
+			"description": "An array of libraries that the addon uses",
+			"items": {
+				"type": "string",
+				"description": "A library identifier.",
+				"minLength": 1
+			},
+			"minItems": 1
 		}
 	},
 	"required": ["name", "description", "tags"],
