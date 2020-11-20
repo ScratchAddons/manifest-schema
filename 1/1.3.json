@@ -163,7 +163,9 @@
 						"description": "The default value of the setting.",
 						"minLength": 1
 					},
-					"potentialValues": {}
+					"potentialValues": {
+						"type": ["array", "string"]
+					}
 				},
 				"allOf": [
 					{
