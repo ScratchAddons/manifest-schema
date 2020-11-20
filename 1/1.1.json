@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.0.json",
+	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.1.json",
 	"title": "Scratch Addons addon manifest",
 	"description": "The manifest that describes an addon.",
 	"type": "object",
@@ -22,7 +22,7 @@
 			"description": "Tags which are used for filtering and badges on the Scratch Addons settings page.",
 			"items": {
 				"type": "string",
-				"description": "A tag",
+				"description": "A tag.",
 				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
 			},
 			"minItems": 1
@@ -146,31 +146,55 @@
 					"type": {
 						"type": "string",
 						"description": "The type of the option",
-						"enum": ["boolean", "positive_integer", "string", "select"]
+						"enum": ["boolean", "positive_integer", "string", "select", "color"]
 					},
 					"default": {
 						"type": ["boolean", "integer", "string"],
 						"description": "The default value of the option."
 					},
-					"potential_values": { 
-						"type": "array",
-						"description": "The potential values for the select option.",
-						"items": {
-							"type": "string",
-							"description": "A potential value for the select option."
+					"potential_values": {}
+				},
+				"allOf": [
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "select" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"potential_values": {
+									"type": "array",
+									"description": "The potential values for the select option.",
+									"items": {
+										"type": "string",
+										"description": "A potential value for the select option."
+									},
+									"minItems": 1
+								}
+							},
+							"required": ["potential_values"]
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "color" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"pattern": "^#([0-9a-fA-F]{3}){1,2}$"
+								}
+							}
 						}
 					}
-				},
-				"if": {
-					"properties": { 
-						"type": { 
-							"const": "select" 
-						} 
-					}
-				},
-				"then": {
-					"required": ["potential_values"]
-				},
+				],
 				"required": ["name", "id", "type", "default"],
 				"additionalProperties": false
 			},
@@ -202,6 +226,14 @@
 			"type": "boolean",
 			"description": "You can provide the \"enabled_by_default\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
 			"default": false
+		},
+		"warning": {
+			"type": "string",
+			"description": "The warning that will be shown to users when using the addon."
+		},
+		"traps": {
+			"type": "boolean",
+			"description": "Determines whether traps are needed to run the addon."
 		}
 	},
 	"required": ["name", "description", "tags"],
