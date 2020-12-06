@@ -155,7 +155,7 @@
 					"type": {
 						"type": "string",
 						"description": "The type of the setting",
-						"enum": ["boolean", "positive_integer", "string", "select", "color"],
+						"enum": ["boolean", "positive_integer", "string", "select", "color", "integer"],
 						"minLength": 1
 					},
 					"default": {
@@ -163,7 +163,9 @@
 						"description": "The default value of the setting.",
 						"minLength": 1
 					},
-					"potentialValues": {}
+					"potentialValues": {},
+					"min": {},
+					"max": {}
 				},
 				"allOf": [
 					{
@@ -249,7 +251,7 @@
 							"properties": {
 								"default": {
 									"type": "integer",
-									"minimum": 1
+									"minimum": 0
 								}
 							}
 						}
@@ -284,6 +286,30 @@
 								"default": {
 									"type": "string",
 									"pattern": "^#([0-9a-fA-F]{3}){1,2}$"
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "integer" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "integer"
+								},
+								"min": {
+									"type": "integer",
+									"description": "The minimum value of the integer."
+								},
+								"max": {
+									"type": "integer",
+									"description": "The maximum value of the integer."
 								}
 							}
 						}
