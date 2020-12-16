@@ -1,0 +1,447 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.6.json",
+	"title": "Scratch Addons addon manifest",
+	"description": "The manifest that describes an addon.",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string",
+			"description": "The URL to the schema."
+		},
+		"name": {
+			"type": "string",
+			"description": "The name of the addon. Don't make it too long.",
+			"minLength": 1
+		},
+		"description": {
+			"type": "string",
+			"description": "The description of the addons. Any credits and attributions also belong here.",
+			"minLength": 1
+		},
+		"tags": {
+			"type": "array",
+			"description": "Tags which are used for filtering and badges on the Scratch Addons settings page.",
+			"items": {
+				"type": "string",
+				"description": "A tag.",
+				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
+			},
+			"minItems": 1
+		},
+		"permissions": {
+			"type": "array",
+			"description": "You can specify permissions by providing a \"permissions\" array.",
+			"items": {
+				"type": "string",
+				"description": "A permission.",
+				"enum": ["notifications", "badge", "clipboardWrite"]
+			},
+			"minItems": 1
+		},
+		"persistentScripts": {
+			"type": "array",
+			"description": "You can add persistent scripts by providing a \"persistentScripts\" array conformed of JS files (e.g. [\"example.js\"]).",
+			"items": {
+				"type": "string",
+				"description": "The path to the persistent script.",
+				"pattern": "\\.js$"
+			},
+			"minItems": 1
+		},
+		"userscripts": {
+			"type": "array",
+			"description": "You can add userscripts by providing a \"userscripts\" array.\nUnlike persistent scripts, this is an array of objects, not strings.\nEach object must specify the url to the userscript through the \"url\" property, and provide an array of URL matches.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "The path to the userscript.",
+						"pattern": "\\.js$"
+					},
+					"matches": {
+						"type": "array",
+						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
+						"items": {
+							"type": "string",
+							"description": "An URL match rule.",
+							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
+						},
+						"minItems": 1
+					},
+					"runAtComplete": {
+						"type": "boolean",
+						"description": "Determines whether the addon should be run after the document is complete loading."
+					},
+					"settingMatch": {
+						"type": "object",
+						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified setting is set to the specified value.",
+						"properties": {
+							"id": {
+								"type": "string",
+								"description": "The identifier of the setting."
+							},
+							"value": {
+								"type": ["boolean", "integer", "string"],
+								"description": "The value of the setting."
+							}
+						}
+					}
+				},
+				"required": ["url", "matches"],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"userstyles": {
+			"type": "array",
+			"description": "Similarly to userscripts, you can specify a \"userstyles\" array.\nEach object must specify the url to the stylesheet through the \"url\" property, and provide an array of URL matches.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"url": {
+						"type": "string",
+						"description": "The path to the userstyle.",
+						"pattern": "\\.css$"
+					},
+					"matches": {
+						"type": "array",
+						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
+						"items": {
+							"type": "string",
+							"description": "An URL match rule.",
+							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
+						}
+					},
+					"settingMatch": {
+						"type": "object",
+						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified setting is set to the specified value.",
+						"properties": {
+							"id": {
+								"type": "string",
+								"description": "The identifier of the setting.",
+								"minLength": 1
+							},
+							"value": {
+								"type": ["boolean", "integer", "string"],
+								"description": "The value of the setting.",
+								"minLength": 1
+							}
+						}
+					}
+				},
+				"required": ["url", "matches"],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"settings": {
+			"type": "array",
+			"description": "The \"settings\" object allow the addon's users to specify settings in Scratch Addons' settings panel. Inside your persistent scripts and userscripts, you can then access those settings with the \"addon.settings\" API.\nSpecify an \"settings\" property and provide an array of setting objects.",
+			"items": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the setting.",
+						"minLength": 1
+					},
+					"id": {
+						"type": "string",
+						"description": "The identifier of the setting to get the specified value from your code.",
+						"minLength": 1
+					},
+					"type": {
+						"type": "string",
+						"description": "The type of the setting",
+						"enum": ["boolean", "positive_integer", "string", "select", "color", "integer"],
+						"minLength": 1
+					},
+					"default": {
+						"type": ["boolean", "integer", "string"],
+						"description": "The default value of the setting.",
+						"minLength": 1
+					},
+					"potentialValues": {},
+					"min": {},
+					"max": {}
+				},
+				"allOf": [
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "select" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"potentialValues": {
+									"type": "array",
+									"description": "The potential values for the select setting.",
+									"items": {
+										"type": ["string", "object"],
+										"description": "A potential value for the select setting.",
+										"allOf": [
+											{
+												"if": {
+													"type": "string" 
+												},
+												"then": {
+													"minLength": 1
+												}
+											},
+											{
+												"if": {
+													"type": "object" 
+												},
+												"then": {
+													"properties": {
+														"name": {
+															"type": "string",
+															"description": "The name of the potential value.",
+															"minLength": 1
+														},
+														"id": {
+															"type": "string",
+															"description": "The identifier of the potential value.",
+															"minLength": 1
+														}
+													}
+												}
+											}
+										]
+									},
+									"minItems": 1
+								},
+								"default": {
+									"type": "string"
+								}
+							},
+							"required": ["potentialValues"]
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "boolean" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "positive_integer" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "integer",
+									"minimum": 0
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "string" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "string",
+									"minLength": 1
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "color" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "string",
+									"pattern": "^#([0-9a-fA-F]{3}){1,2}$"
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "integer" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "integer"
+								},
+								"min": {
+									"type": "integer",
+									"description": "The minimum value of the integer."
+								},
+								"max": {
+									"type": "integer",
+									"description": "The maximum value of the integer."
+								}
+							}
+						}
+					}
+				],
+				"required": ["name", "id", "type", "default"],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"credits": {
+			"type": "array",
+			"description": "An array containing credits to the authors/contributors of the addon.",
+			"items": {
+				"type": "object",
+				"description": "A credited author/contributor.",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the credited person.",
+						"minLength": 1
+					},
+					"link": {
+						"type": "string",
+						"description": "The link relevant to the credit.",
+						"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
+					}
+				},
+				"required": ["name"],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"enabledByDefault": {
+			"type": "boolean",
+			"description": "You can provide the \"enabledByDefault\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
+			"default": false
+		},
+		"warning": {
+			"type": "string",
+			"description": "The warning that will be shown to users when using the addon.",
+			"minLength": 1
+		},
+		"traps": {
+			"type": "boolean",
+			"description": "Determines whether traps are needed to run the addon.",
+			"default": false
+		},
+		"presets": {
+			"type": "array",
+			"description": "An array containing presets for settings.",
+			"items": {
+				"type": "object",
+				"description": "A preset.",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the preset.",
+						"minLength": 1
+					},
+					"id": {
+						"type": "string",
+						"description": "The identifier of the preset.",
+						"minLength": 1
+					 },
+					"description": {
+						"type": "string",
+						"description": "The description of the preset.",
+						"minLength": 1
+					 },
+					"values": {
+						"type": "object",
+						"description": "An object containing preset values of the settings.",
+						"patternProperties": {
+							".": {
+								"description": "The preset value of the setting.",
+								"type": ["boolean", "integer", "string"]
+							}
+						}
+					}
+				},
+				"required": ["name", "id", "values"],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
+		"notice": {
+			"type": "string",
+			"description": "The notice that will be shown to users when using the addon.",
+			"minLength": 1
+		},
+		"l10n": {
+			"type": "boolean",
+			"description": "Determines whether localization (l10n) files of the addon are loaded.",
+			"default": false
+		},
+		"libraries": {
+			"type": "array",
+			"description": "An array of libraries that the addon uses",
+			"items": {
+				"type": "string",
+				"description": "A library identifier.",
+				"minLength": 1
+			},
+			"minItems": 1
+		},
+		"popup": {
+			"items": {
+				"type": "object",
+				"description": "An object for the popup",
+				"properties": {
+					"icon": {
+						"type": "string",
+						"description": "Url to the icon.",
+						"minLength": 1
+					},
+					"name": {
+						"type": "string",
+						"description": "Name of the popup.",
+						"minLength": 1
+					},
+					"fullscreen": {
+						"type": "boolean",
+						"description": "Whether to show the fullscreen button.",
+						"default": false
+					}
+				},
+				"minItems": 1,
+				"required": ["icon", "name"]
+}
+		}
+	},
+	"required": ["name", "description", "tags"],
+	"additionalProperties": false
+}
