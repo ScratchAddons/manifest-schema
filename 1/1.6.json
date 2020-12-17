@@ -435,15 +435,10 @@
 						"type": "boolean",
 						"description": "Whether to show the fullscreen button.",
 						"default": false
-					},
-					"id": {
-						"type": "string",
-						"description": "ID for localization.",
-						"minLength": 1
 					}
 				},
 				"minItems": 1,
-				"required": ["icon", "name", "id"]
+				"required": ["icon", "name"]
 }
 		}
 	},
