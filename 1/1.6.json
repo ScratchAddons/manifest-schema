@@ -416,24 +416,24 @@
 			},
 			"minItems": 1
 		},		
-    "popup": {
+		"popup": {
 			"items": {
 				"type": "object",
-				"description": "An object for the popup",
+				"description": "An object for the popup.",
 				"properties": {
 					"icon": {
 						"type": "string",
-						"description": "Url to the icon.",
+						"description": "The path to the popup icon.",
 						"minLength": 1
 					},
 					"name": {
 						"type": "string",
-						"description": "Name of the popup.",
+						"description": "The name of the popup.",
 						"minLength": 1
 					},
 					"fullscreen": {
 						"type": "boolean",
-						"description": "Whether to show the fullscreen button.",
+						"description": "Determines whether to show the fullscreen button.",
 						"default": false
 					}
 				},
