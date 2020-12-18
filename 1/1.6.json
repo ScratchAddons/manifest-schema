@@ -415,8 +415,8 @@
 				"minLength": 1
 			},
 			"minItems": 1
-		},
-		"popup": {
+		},		
+    "popup": {
 			"items": {
 				"type": "object",
 				"description": "An object for the popup",
@@ -439,7 +439,7 @@
 				},
 				"minItems": 1,
 				"required": ["icon", "name"]
-}
+			}
 		}
 	},
 	"required": ["name", "description", "tags"],
