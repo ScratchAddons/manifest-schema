@@ -25,7 +25,7 @@
 			"items": {
 				"type": "string",
 				"description": "A tag.",
-				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
+				"enum": ["community", "editor", "theme", "beta", "recommended", "forums", "easterEgg"]
 			},
 			"minItems": 1
 		},
