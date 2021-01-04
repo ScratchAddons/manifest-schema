@@ -25,7 +25,7 @@
 			"items": {
 				"type": "string",
 				"description": "A tag.",
-				"enum": ["community", "editor", "theme", "beta", "recommended", "forums"]
+				"enum": ["community", "editor", "theme", "beta", "recommended", "forums", "easterEgg"]
 			},
 			"minItems": 1
 		},
@@ -348,11 +348,6 @@
 			"description": "You can provide the \"enabledByDefault\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
 			"default": false
 		},
-		"warning": {
-			"type": "string",
-			"description": "The warning that will be shown to users when using the addon.",
-			"minLength": 1
-		},
 		"traps": {
 			"type": "boolean",
 			"description": "Determines whether traps are needed to run the addon.",
@@ -396,11 +391,6 @@
 			},
 			"minItems": 1
 		},
-		"notice": {
-			"type": "string",
-			"description": "The notice that will be shown to users when using the addon.",
-			"minLength": 1
-		},
 		"l10n": {
 			"type": "boolean",
 			"description": "Determines whether localization (l10n) files of the addon are loaded.",
@@ -415,7 +405,36 @@
 				"minLength": 1
 			},
 			"minItems": 1
-		},		
+		},
+		"info": {
+			"type": "array",
+			"description": "An array of additional information (e.g. warnings, notices) about the addon.",
+			"items": {
+				"type": "object",
+				"description": "Information about the addon.",
+				"properties": {
+					"type": {
+						"type": "string",
+						"description": "Type of the information.",
+						"enum": ["warning", "notice"],
+						"minLength": 1
+					},
+					"id": {
+						"type": "string",
+						"description": "ID of the information.",
+						"minLength": 1
+					},
+					"text": {
+						"type": "string",
+						"description": "Text of the information.",
+						"minLength": 1
+					}
+				},
+				"required": ["type", "id", "text"],
+				"additionalProperties": false
+			},
+			"minItems": 1
+		},
 		"popup": {
 			"items": {
 				"type": "object",
