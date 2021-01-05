@@ -348,9 +348,9 @@
 			"description": "You can provide the \"enabledByDefault\" property and set it to true. Its default value is false.\nKeep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.",
 			"default": false
 		},
-		"traps": {
+		"refreshRequired": {
 			"type": "boolean",
-			"description": "Determines whether traps are needed to run the addon.",
+			"description": "Determines whether refresh is required after enabling the theme.",
 			"default": false
 		},
 		"presets": {
