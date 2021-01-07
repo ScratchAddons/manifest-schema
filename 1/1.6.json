@@ -320,6 +320,33 @@
 			},
 			"minItems": 1
 		},
+		"popup": {
+			"type": "object",
+			"description": "The details of an addon's popup",
+			"items": {
+				"type": "object",
+				"description": "A credited author/contributor.",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of your popup displayed in the browser popup.",
+						"minLength": 1
+					},
+					"icon": {
+						"type": "string",
+						"description": "The file that the popup should get it's icon from.",
+						"minLength": 1
+					},
+					"fullscreen": {
+						"type": "boolean",
+						"description": "Weather or not this addon can popupout.",
+						"default": false
+					},
+				},
+				"required": ["name", "icon"],
+				"additionalProperties": false
+			}
+		},
 		"credits": {
 			"type": "array",
 			"description": "An array containing credits to the authors/contributors of the addon.",
