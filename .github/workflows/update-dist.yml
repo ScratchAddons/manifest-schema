@@ -1,0 +1,57 @@
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "*/*.json"
+
+name: Dist. Branch Update
+
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout ScratchAddons/Website
+        uses: actions/checkout@v2
+
+      - name: Checkout ScratchAddons/schema-dist-updater
+        uses: actions/checkout@v2
+        with:
+          repository: ScratchAddons/schema-dist-updater
+          path: script
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x 
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install --prefix script
+
+      - name: Create branch folder
+        run: node script/index.js
+
+      - name: Generate token 
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.BOT_APP_ID }}
+          private_key: ${{ secrets.BOT_PRIVATE_KEY }}
+
+      - name: Update branch with the folder
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ steps.generate-token.outputs.token }}
+          publish_dir: dist
+          force_orphan: true
+          branch: dist
