@@ -54,4 +54,4 @@ jobs:
           github_token: ${{ steps.generate-token.outputs.token }}
           publish_dir: dist
           force_orphan: true
-          branch: dist
+          publish_branch: dist
