@@ -459,6 +459,11 @@
 				"minItems": 1,
 				"required": ["icon", "name"]
 			}
+		},
+		"dynamicDisable": {
+			"type": "boolean",
+			"description": "Determines whether addon userstyles should be removed from pages after the addon gets disabled, and the addon should be considered effectively disabled by Scratch Addons, even if it's still running userscripts on the page.",
+			"default": false
 		}
 	},
 	"required": ["name", "description", "tags"],
