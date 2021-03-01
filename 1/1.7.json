@@ -459,6 +459,11 @@
 				"minItems": 1,
 				"required": ["icon", "name"]
 			}
+		},
+		"dynamicDisable": {
+			"type": "boolean",
+			"description": "Determines whether the userstyles could be disabled dynamically.",
+			"default": false
 		}
 	},
 	"required": ["name", "description", "tags"],
