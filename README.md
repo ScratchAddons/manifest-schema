@@ -10,7 +10,7 @@ Add the pointed line to your manifest. Depending on your placement, you need to 
 
 ```json5
 {
-    "$schema": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.6.json", // This one!
+    "$schema": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/dist/schema.json", // This one!
     "name": "...",
     ...
 }
