@@ -464,6 +464,11 @@
 			"type": "boolean",
 			"description": "Determines whether the userstyles could be disabled dynamically.",
 			"default": false
+		},
+		"dynamicEnable": {
+			"type": "boolean",
+			"description": "Determines whether the userstyles could be enabled dynamically.",
+			"default": false
 		}
 	},
 	"required": ["name", "description", "tags"],
