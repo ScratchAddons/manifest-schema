@@ -165,7 +165,8 @@
 					},
 					"potentialValues": {},
 					"min": {},
-					"max": {}
+					"max": {},
+					"allowTransparency": {}
 				},
 				"allOf": [
 					{
@@ -286,6 +287,10 @@
 								"default": {
 									"type": "string",
 									"pattern": "^#([0-9a-fA-F]{3}){1,2}$"
+								},
+								"allowTransparency": {
+									"type": "boolean",
+									"description": "", "$comment": "TODO"
 								}
 							}
 						}
