@@ -286,11 +286,28 @@
 							"properties": {
 								"default": {
 									"type": "string",
-									"pattern": "^#([0-9a-fA-F]{3}){1,2}$"
+									"pattern": "^#([0-9a-fA-F]{2}){1,4}$"
 								},
 								"allowTransparency": {
 									"type": "boolean",
-									"description": "", "$comment": "TODO"
+									"description": "Determines whether the transparency/opacity/alpha value can be changed when choosing a color"
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"allowTransparency": { 
+									"const": false 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "string",
+									"pattern": "^#([0-9a-fA-F]{2}){1,3}$"
 								}
 							}
 						}
