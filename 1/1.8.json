@@ -297,7 +297,10 @@
 					},
 					{
 						"if": {
-							"properties": { 
+							"properties": {
+								"type": {
+									"const": "color"
+								},
 								"allowTransparency": { 
 									"const": false 
 								} 
