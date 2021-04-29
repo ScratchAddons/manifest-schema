@@ -61,14 +61,7 @@
 						"pattern": "\\.js$"
 					},
 					"matches": {
-						"type": "array",
-						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
-						"items": {
-							"type": "string",
-							"description": "An URL match rule.",
-							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
-						},
-						"minItems": 1
+						"$ref": "#/definitions/matches"
 					},
 					"runAtComplete": {
 						"type": "boolean",
@@ -106,13 +99,7 @@
 						"pattern": "\\.css$"
 					},
 					"matches": {
-						"type": "array",
-						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
-						"items": {
-							"type": "string",
-							"description": "An URL match rule.",
-							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
-						}
+						"$ref": "#/definitions/matches"
 					},
 					"settingMatch": {
 						"type": "object",
@@ -637,5 +624,54 @@
 				}
 			]
 		}
+	},
+	"matches": {
+		"oneOf": [
+			{
+				"type": "string",
+				"const": "*"
+			},
+			{
+				"type": "string",
+				"pattern": "^\\^"
+			},
+			{
+				"type": "array",
+				"items": {
+					"oneOf": [
+						{
+							"type": "string",
+							"pattern": "^\\^"
+						},
+						{
+							"type": "string",
+							"enum": [
+								"projects",
+								"projectEmbeds",
+								"studios",
+								"studioComments",
+								"profiles",
+								"topics",
+								"newPostScreens",
+								"editingScreens",
+								"forums",
+								"scratchWWWNoProject"
+							]
+						},
+						{
+							"type": "string",
+							"enum": [
+								"isNotScratchWWW"
+							]
+						},
+						{
+							"type": "string",
+							"pattern": "^https://"
+						}
+					]
+				},
+				"minItems": 1
+			}
+		]
 	}
 }
