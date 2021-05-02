@@ -141,6 +141,7 @@
 				{
 					"type": "string",
 					"description": "A RegEx match rule. Patterns starting with https will be treated as an absolute RegEx pattern, and patterns that don't start will be treated as an relative RegEx pattern.", 
+					"pattern": "^\\^"
 				},
 				{
 					"type": "array",
@@ -150,6 +151,7 @@
 							{
 								"type": "string",
 								"description": "A RegEx match rule. Patterns starting with https will be treated as an absolute RegEx pattern, and patterns that don't start will be treated as an relative RegEx pattern.", 
+								"pattern": "^\\^"
 							},
 							{
 								"type": "string",
