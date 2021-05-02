@@ -197,7 +197,29 @@
 			"items": {
 				"type": "string",
 				"description": "A tag.",
-				"enum": ["community", "editor", "theme", "beta", "recommended", "forums", "easterEgg"]
+				"enum": [
+					"community",
+					"editor",
+					"popup",
+					"theme",
+					"beta",
+					"danger",
+					"recommended",
+					"forums",
+					"easterEgg",
+					"codeEditor",
+					"costumeEditor",
+					"projectPlayer",
+					"projectPage",
+					"profiles"
+				]
+			},
+			"contains": {
+				"enum": [
+					"community",
+					"editor",
+					"popup"
+				]
 			},
 			"minItems": 1
 		},
