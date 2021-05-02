@@ -210,8 +210,11 @@
 					"codeEditor",
 					"costumeEditor",
 					"projectPlayer",
+					"editorMenuBar",
 					"projectPage",
-					"profiles"
+					"profiles",
+					"studios",
+					"comments"
 				]
 			},
 			"contains": {
