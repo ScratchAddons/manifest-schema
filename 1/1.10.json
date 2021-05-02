@@ -709,6 +709,11 @@
 				},
 				"required": ["name", "value"]
 			}
+		},
+		"versionAdded": {
+			"type": "string",
+			"description": "The version that introduced the addon.",
+			"pattern": "^1\\.\\d+\\.\\d+$"
 		}
 	},
 	"required": ["name", "description", "tags"],
