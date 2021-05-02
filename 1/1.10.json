@@ -4,6 +4,178 @@
 	"title": "Scratch Addons addon manifest",
 	"description": "The manifest that describes an addon.",
 	"type": "object",
+	"definitions": {
+		"cssManipulator": {
+			"type": "object",
+			"description": "The value manipulator.",
+			"oneOf": [
+				{
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "settingValue"
+						},
+						"settingId": {
+							"type": "string",
+							"description": "The setting ID to reference."
+						}
+					},
+					"required": ["settingId"]
+				},
+				{
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "textColor"
+						},
+						"source": {
+							"type": "object",
+							"description": "The source to manipulate.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"threshold": {
+							"type": "number",
+							"minimum": 0, "$comment": "TODO: Clarify this"
+						},
+						"black": {
+							"type": "string",
+							"description": "The value for black text."
+						},
+						"white": {
+							"type": "string",
+							"description": "The value for black text."
+						}
+					},
+					"required": ["source", "black", "white"]
+				},
+				{
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "multiply"
+						},
+						"source": {
+							"type": "object",
+							"description": "The source to manipulate.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"r": {
+							"type": "number",
+							"description": "The red value of the color.",
+							"default": 1,
+							"minimum": 0
+						},
+						"g": {
+							"type": "number",
+							"description": "The green value of the color.",
+							"default": 1,
+							"minimum": 0
+						},
+						"b": {
+							"type": "number",
+							"description": "The blue value of the color.",
+							"default": 1,
+							"minimum": 0
+						},
+						"a": {
+							"type": "number",
+							"description": "The alpha/opacity value of the color.",
+							"default": 1,
+							"minimum": 0
+						}
+					},
+					"required": ["source"]
+				},
+				{
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "brighten"
+						},
+						"source": {
+							"type": "object",
+							"description": "The source to manipulate.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"r": {
+							"type": "number",
+							"description": "The red value of the color.",
+							"default": 1,
+							"minimum": 0
+						},
+						"g": {
+							"type": "number",
+							"description": "The green value of the color.",
+							"default": 1,
+							"minimum": 0
+						},
+						"b": {
+							"type": "number",
+							"description": "The blue value of the color.",
+							"default": 1,
+							"minimum": 0
+						},
+						"a": {
+							"type": "number",
+							"description": "The alpha/opacity value of the color.",
+							"default": 1,
+							"minimum": 0
+						}
+					},
+					"required": ["source"]
+				}
+			],
+			"required": ["type"]
+		},
+		"matches": {
+			"oneOf": [
+				{
+					"type": "string",
+					"description": "A match rule for any URL on Scratch origin. The script will execute will execute in all pages.",
+					"const": "*"
+				},
+				{
+					"type": "string",
+					"description": "A RegEx match rule. Patterns starting with https will be treated as an absolute RegEx pattern, and patterns that don't start will be treated as an relative RegEx pattern.", 
+					"pattern": "^\\^"
+				},
+				{
+					"type": "array",
+					"description": "An array that contains match rules. The script will execute if it matches any of the rules.",
+					"items": {
+						"oneOf": [
+							{
+								"type": "string",
+								"description": "A RegEx match rule. Patterns starting with https will be treated as an absolute RegEx pattern, and patterns that don't start will be treated as an relative RegEx pattern.", 
+								"pattern": "^\\^"
+							},
+							{
+								"type": "string",
+								"description": "A match rule shortcut.",
+								"enum": ["projects",
+									"projectEmbeds", "studios", "studioComments", "profiles", "topics", "newPostScreens", "editingScreens", "forums", "scratchWWWNoProject"]
+							},
+							{
+								"type": "string",
+								"description": "A match rule shortcut matcher.",
+								"enum": ["isNotScratchWWW"]
+							},
+							{
+								"type": "string",
+								"description": "A URL match rule.",
+								"pattern": "^https://", "$comment": "TODO: Clarify this. This seemed only for absolute patterns. Is the relative is on the top?"
+							}
+						]
+					},
+					"minItems": 1
+				}
+			]
+		}
+	},
 	"properties": {
 		"$schema": {
 			"type": "string",
@@ -25,7 +197,32 @@
 			"items": {
 				"type": "string",
 				"description": "A tag.",
-				"enum": ["community", "editor", "theme", "beta", "recommended", "forums", "easterEgg"]
+				"enum": [
+					"community",
+					"editor",
+					"popup",
+					"theme",
+					"beta",
+					"danger",
+					"recommended",
+					"forums",
+					"easterEgg",
+					"codeEditor",
+					"costumeEditor",
+					"projectPlayer",
+					"editorMenuBar",
+					"projectPage",
+					"profiles",
+					"studios",
+					"comments"
+				]
+			},
+			"contains": {
+				"enum": [
+					"community",
+					"editor",
+					"popup"
+				]
 			},
 			"minItems": 1
 		},
@@ -61,14 +258,7 @@
 						"pattern": "\\.js$"
 					},
 					"matches": {
-						"type": "array",
-						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
-						"items": {
-							"type": "string",
-							"description": "An URL match rule.",
-							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
-						},
-						"minItems": 1
+						"$ref": "#/definitions/matches"
 					},
 					"runAtComplete": {
 						"type": "boolean",
@@ -106,13 +296,7 @@
 						"pattern": "\\.css$"
 					},
 					"matches": {
-						"type": "array",
-						"description": "An array that contains URL match rules. The script will execute if it matches any of the rules.",
-						"items": {
-							"type": "string",
-							"description": "An URL match rule.",
-							"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
-						}
+						"$ref": "#/definitions/matches"
 					},
 					"settingMatch": {
 						"type": "object",
@@ -504,6 +688,32 @@
 			"type": "boolean",
 			"description": "Determines whether the addon's userstyles should be removed and rematched to the new settings.",
 			"default": false
+		},
+		"customCssVariables": {
+			"type": "array",
+			"description": "An array of CSS variables the addon defines.",
+			"items": {
+				"type": "object",
+				"description": "A CSS variable.",
+				"properties": {
+					"name": {
+						"type": "string",
+						"description": "The name of the CSS variable.",
+						"minLength": 1,
+						"pattern": "^[\\w-]+$"
+					},
+					"value": {
+						"type": "object",
+						"$ref": "#/definitions/cssManipulator"
+					}
+				},
+				"required": ["name", "value"]
+			}
+		},
+		"versionAdded": {
+			"type": "string",
+			"description": "The version that introduced the addon.",
+			"pattern": "^1\\.\\d+\\.\\d+$"
 		}
 	},
 	"required": ["name", "description", "tags"],
