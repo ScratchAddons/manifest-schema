@@ -35,7 +35,6 @@
 							"const": "textColor"
 						},
 						"source": {
-							"type": "object",
 							"description": "The source to manipulate.",
 							"$ref": "#/definitions/cssManipulator"
 						},
@@ -44,12 +43,10 @@
 							"minimum": 0, "$comment": "TODO: Clarify this"
 						},
 						"black": {
-							"type": "object",
 							"description": "The value for black text.",
 							"$ref": "#/definitions/cssManipulator"
 						},
 						"white": {
-							"type": "object",
 							"description": "The value for white text.",
 							"$ref": "#/definitions/cssManipulator"
 						}
@@ -65,7 +62,6 @@
 							"const": "multiply"
 						},
 						"source": {
-							"type": "object",
 							"description": "The source to manipulate.",
 							"$ref": "#/definitions/cssManipulator"
 						},
@@ -105,7 +101,6 @@
 							"const": "brighten"
 						},
 						"source": {
-							"type": "object",
 							"description": "The source to manipulate.",
 							"$ref": "#/definitions/cssManipulator"
 						},
@@ -145,12 +140,10 @@
 							"const": "alphaBlend"
 						},
 						"opaqueSource": {
-							"type": "object",
 							"description": "The source that provides opaque color.",
 							"$ref": "#/definitions/cssManipulator"
 						},
 						"transparentSource": {
-							"type": "object",
 							"description": "The source that provides transparent color.",
 							"$ref": "#/definitions/cssManipulator"
 						}
@@ -734,7 +727,6 @@
 						"pattern": "^[\\w-]+$"
 					},
 					"value": {
-						"type": "object",
 						"$ref": "#/definitions/cssManipulator"
 					}
 				},
