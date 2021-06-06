@@ -482,6 +482,14 @@
 								"default": {
 									"type": "string",
 									"minLength": 1
+								},
+								"min": {
+									"type": "integer",
+									"description": "The minimum length of the string."
+								},
+								"max": {
+									"type": "integer",
+									"description": "The maximum length of the string."
 								}
 							}
 						}
