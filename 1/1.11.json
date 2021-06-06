@@ -1,15 +1,18 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.10.json",
+	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.11.json",
 	"title": "Scratch Addons addon manifest",
 	"description": "The manifest that describes an addon.",
 	"type": "object",
 	"definitions": {
 		"cssManipulator": {
-			"type": "object",
 			"description": "The value manipulator.",
 			"oneOf": [
 				{
+					"type": "string"
+				},
+				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -24,6 +27,7 @@
 					"required": ["settingId"]
 				},
 				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -40,17 +44,20 @@
 							"minimum": 0, "$comment": "TODO: Clarify this"
 						},
 						"black": {
-							"type": "string",
-							"description": "The value for black text."
+							"type": "object",
+							"description": "The value for black text.",
+							"$ref": "#/definitions/cssManipulator"
 						},
 						"white": {
-							"type": "string",
-							"description": "The value for black text."
+							"type": "object",
+							"description": "The value for white text.",
+							"$ref": "#/definitions/cssManipulator"
 						}
 					},
-					"required": ["source", "black", "white"]
+					"required": ["source"]
 				},
 				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -90,6 +97,7 @@
 					"required": ["source"]
 				},
 				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -127,9 +135,29 @@
 						}
 					},
 					"required": ["source"]
+				},
+				{
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "alphaBlend"
+						},
+						"opaqueSource": {
+							"type": "object",
+							"description": "The source that provides opaque color.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"transparentSource": {
+							"type": "object",
+							"description": "The source that provides transparent color.",
+							"$ref": "#/definitions/cssManipulator"
+						}
+					},
+					"required": ["opaqueSource", "transparentSource"]
 				}
-			],
-			"required": ["type"]
+			]
 		},
 		"matches": {
 			"oneOf": [
@@ -454,6 +482,14 @@
 								"default": {
 									"type": "string",
 									"minLength": 1
+								},
+								"min": {
+									"type": "integer",
+									"description": "The minimum length of the string."
+								},
+								"max": {
+									"type": "integer",
+									"description": "The maximum length of the string."
 								}
 							}
 						}
