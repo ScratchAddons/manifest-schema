@@ -135,6 +135,27 @@
 						}
 					},
 					"required": ["source"]
+				},
+				{
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "alphaBlend"
+						},
+						"opaqueSource": {
+							"type": "object",
+							"description": "The source that provides opaque color.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"transparentSource": {
+							"type": "object",
+							"description": "The source that provides transparent color.",
+							"$ref": "#/definitions/cssManipulator"
+						}
+					},
+					"required": ["opaqueSource", "transparentSource"]
 				}
 			]
 		},
