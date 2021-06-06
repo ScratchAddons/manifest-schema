@@ -6,10 +6,13 @@
 	"type": "object",
 	"definitions": {
 		"cssManipulator": {
-			"type": "object",
 			"description": "The value manipulator.",
 			"oneOf": [
 				{
+					"type": "string"
+				},
+				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -24,6 +27,7 @@
 					"required": ["settingId"]
 				},
 				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -40,33 +44,20 @@
 							"minimum": 0, "$comment": "TODO: Clarify this"
 						},
 						"black": {
+							"type": "object",
 							"description": "The value for black text.",
-							"oneOf": [
-								{
-									"type": "string"
-								},
-								{
-									"type": "object",
-									"$ref": "#/definitions/cssManipulator"
-								}
-							]
+							"$ref": "#/definitions/cssManipulator"
 						},
 						"white": {
+							"type": "object",
 							"description": "The value for white text.",
-							"oneOf": [
-								{
-									"type": "string"
-								},
-								{
-									"type": "object",
-									"$ref": "#/definitions/cssManipulator"
-								}
-							]
+							"$ref": "#/definitions/cssManipulator"
 						}
 					},
 					"required": ["source"]
 				},
 				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -106,6 +97,7 @@
 					"required": ["source"]
 				},
 				{
+					"type": "object",
 					"properties": {
 						"type": {
 							"type": "string",
@@ -144,8 +136,7 @@
 					},
 					"required": ["source"]
 				}
-			],
-			"required": ["type"]
+			]
 		},
 		"matches": {
 			"oneOf": [
