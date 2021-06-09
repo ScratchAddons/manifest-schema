@@ -149,6 +149,21 @@
 						}
 					},
 					"required": ["opaqueSource", "transparentSource"]
+				},
+				{
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "recolorFilter"
+						},
+						"source": {
+							"description": "The source that provides the color.",
+							"$ref": "#/definitions/cssManipulator"
+						}
+					},
+					"required": ["source"]
 				}
 			]
 		},
