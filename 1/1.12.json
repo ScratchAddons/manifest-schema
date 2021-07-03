@@ -375,18 +375,19 @@
 					"type": {
 						"type": "string",
 						"description": "The type of the setting",
-						"enum": ["boolean", "positive_integer", "string", "select", "color", "integer"],
+						"enum": ["boolean", "positive_integer", "string", "select", "color", "integer", "table"],
 						"minLength": 1
 					},
 					"default": {
-						"type": ["boolean", "integer", "string"],
+						"type": ["boolean", "integer", "string", "array"],
 						"description": "The default value of the setting.",
 						"minLength": 1
 					},
 					"potentialValues": {},
 					"min": {},
 					"max": {},
-					"allowTransparency": {}
+					"allowTransparency": {},
+					"row": {}
 				},
 				"allOf": [
 					{
@@ -563,6 +564,59 @@
 								"max": {
 									"type": "integer",
 									"description": "The maximum value of the integer."
+								}
+							}
+						}
+					},
+					{
+						"if": {
+							"properties": { 
+								"type": { 
+									"const": "table" 
+								} 
+							}
+						},
+						"then": {
+							"properties": {
+								"default": {
+									"type": "array",
+									"items": {
+										"type": "array",
+										"description": "An array that defines the default values of the seting rows.",
+										"items": {
+											"type": ["boolean", "integer", "string"],
+											"description": "The default value of the row.",
+											"minLength": 1
+										},
+										"minItems": 1
+									}
+								},
+								"row": {
+									"type": "array",
+									"description": "An array that defines the setting rows.",
+									"items": {
+										"type": "object",
+										"description": "A setting row.",
+										"properties": {
+											"name": {
+												"type": "string",
+												"description": "The name of the setting.",
+												"minLength": 1
+											},
+											"id": {
+												"type": "string",
+												"description": "The identifier of the setting to get the specified value from your code.",
+												"minLength": 1
+											},
+											"type": {
+												"type": "string",
+												"description": "The type of the setting",
+												"enum": ["boolean", "positive_integer", "string", "select", "color", "integer"],
+												"minLength": 1
+											}
+										}
+									},
+									"minItems": 1
 								}
 							}
 						}
