@@ -12,6 +12,9 @@
 					"type": "string"
 				},
 				{
+					"type": "number"
+				},
+				{
 					"type": "object",
 					"properties": {
 						"type": {
@@ -187,6 +190,29 @@
 						}
 					},
 					"required": ["source"]
+				},
+				{
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "makeHsv"
+						},
+						"h": {
+							"description": "The source that provides hue.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"s": {
+							"description": "The source that provides saturation.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"v": {
+							"description": "The source that provides value.",
+							"$ref": "#/definitions/cssManipulator"
+						}
+					},
+					"required": ["h", "s", "v"]
 				}
 			]
 		},
