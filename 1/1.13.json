@@ -783,6 +783,27 @@
 			"type": "string",
 			"description": "The version that introduced the addon.",
 			"pattern": "^1\\.\\d+\\.\\d+$"
+		},
+		"history": {
+			"type": "array",
+			"description": "All update history for the addon.",
+			"items": {
+				"type": "object",
+				"description": "An update's data.",
+				"properties": {
+					"version": {
+						"type": "string",
+						"description": "The version the update happened.",
+						"minLength": 1,
+						"pattern": "^1\\.\\d+\\.\\d+$"
+					},
+					"description": {
+						"type": "string",
+						"description": "The description of the update."
+					}
+				},
+				"required": ["version", "description"]
+			}
 		}
 	},
 	"required": ["name", "description", "tags"],
