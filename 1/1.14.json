@@ -35,6 +35,29 @@
 						"type": {
 							"type": "string",
 							"description": "The type of the manipulator.",
+							"const": "ternary"
+						},
+						"source": {
+							"description": "The source to manipulate.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"true": {
+							"description": "The value in case the source is truthy.",
+							"type": ["object", "string", "number", "null"]
+						},
+						"false": {
+							"description": "The value in case the source is falsy.",
+							"type": ["object", "string", "number", "null"]
+						}
+					},
+					"required": ["source", "true", "false"]
+				},
+				{
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
 							"const": "textColor"
 						},
 						"source": {
@@ -236,6 +259,29 @@
 					"minItems": 1
 				}
 			]
+		},
+		"if": {
+			"type": "object",
+			"properties": {
+				"settings": {
+					"type": "object",
+					"minProperties": 1
+				},
+				"addonEnabled": {
+					"oneOf": [
+						{
+							"type": "string"
+						},
+						{
+							"type": "array",
+							"minItems": 1,
+							"items": {
+								"type": "string"
+							}
+						}
+					]
+				}
+			}
 		}
 	},
 	"properties": {
@@ -326,19 +372,8 @@
 						"type": "boolean",
 						"description": "Determines whether the addon should be run after the document is complete loading."
 					},
-					"settingMatch": {
-						"type": "object",
-						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified setting is set to the specified value.",
-						"properties": {
-							"id": {
-								"type": "string",
-								"description": "The identifier of the setting."
-							},
-							"value": {
-								"type": ["boolean", "integer", "string"],
-								"description": "The value of the setting."
-							}
-						}
+					"if": {
+						"$ref": "#/definitions/if"
 					}
 				},
 				"required": ["url", "matches"],
@@ -360,21 +395,8 @@
 					"matches": {
 						"$ref": "#/definitions/matches"
 					},
-					"settingMatch": {
-						"type": "object",
-						"description": "You can provide a \"settingMatch\" object that will result in your userscript/userstyle only running if the specified setting is set to the specified value.",
-						"properties": {
-							"id": {
-								"type": "string",
-								"description": "The identifier of the setting.",
-								"minLength": 1
-							},
-							"value": {
-								"type": ["boolean", "integer", "string"],
-								"description": "The value of the setting.",
-								"minLength": 1
-							}
-						}
+					"if": {
+						"$ref": "#/definitions/if"
 					}
 				},
 				"required": ["url", "matches"],
@@ -412,7 +434,10 @@
 					"potentialValues": {},
 					"min": {},
 					"max": {},
-					"allowTransparency": {}
+					"allowTransparency": {},
+					"if": {
+						"$ref": "#/definitions/if"
+					}
 				},
 				"allOf": [
 					{
@@ -774,6 +799,10 @@
 					},
 					"value": {
 						"$ref": "#/definitions/cssManipulator"
+					},
+					"dropNull": {
+						"type": "boolean",
+						"description": "Whethe to drop the variable entirely when it evaluates to null."
 					}
 				},
 				"required": ["name", "value"]
