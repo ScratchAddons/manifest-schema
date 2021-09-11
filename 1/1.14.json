@@ -566,7 +566,7 @@
 							"properties": {
 								"default": {
 									"type": "string",
-									"pattern": "^#([0-9a-fA-F]{2}){1,4}$"
+									"format": "color"
 								},
 								"allowTransparency": {
 									"type": "boolean",
