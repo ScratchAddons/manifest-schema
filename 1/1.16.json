@@ -65,8 +65,7 @@
 							"$ref": "#/definitions/cssManipulator"
 						},
 						"threshold": {
-							"type": "number",
-							"minimum": 0, "$comment": "TODO: Clarify this"
+							"$ref": "#/definitions/cssManipulator"
 						},
 						"black": {
 							"description": "The value for black text.",
