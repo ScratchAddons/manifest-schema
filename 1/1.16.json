@@ -860,8 +860,35 @@
 			],
 			"required": ["type"],
 			"additionalProperties": false
+		},
+		"latestUpdate": {
+			"type": "object",
+			"description": "The information about the latest update.",
+			"properties": {
+				"version": {
+					"type": "string",
+					"description": "The version of the update."
+				},
+				"isMajor": {
+					"type": "boolean",
+					"description": "Whether to list the addon on \"Featured new addons and updates\"."
+				},
+				"temporaryNotice": {
+					"type": "string",
+					"description": "The notice describing the update."
+				},
+				"newSettings": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": "The array of new setting IDs."
+				}
+			},
+			"additionalProperties": false,
+			"required": ["version"]
 		}
 	},
-	"required": ["name", "description", "tags"],
+	"required": ["name", "description", "tags", "versionAdded"],
 	"additionalProperties": false
 }
