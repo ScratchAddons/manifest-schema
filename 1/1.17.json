@@ -281,6 +281,228 @@
 					]
 				}
 			}
+		},
+		"serializedTableNestableSettings": {
+			"type": "object",
+			"patternProperties": {
+				".": {
+					"type": ["boolean", "number", "string"]
+				}
+			},
+			"minProperties": 1
+		},
+		"tableNestableSettings": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": "The name of the setting.",
+					"minLength": 1
+				},
+				"id": {
+					"type": "string",
+					"description": "The identifier of the setting to get the specified value from your code.",
+					"minLength": 1
+				},
+				"type": {
+					"type": "string",
+					"description": "The type of the setting",
+					"enum": ["boolean", "positive_integer", "string", "select", "color", "integer", "untranslated"],
+					"minLength": 1
+				},
+				"default": {
+					"type": ["boolean", "integer", "string"],
+					"description": "The default value of the setting."
+				},
+				"potentialValues": {},
+				"min": {},
+				"max": {},
+				"allowTransparency": {},
+				"if": {
+					"$ref": "#/definitions/if"
+				}
+			},
+			"allOf": [
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "select"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"potentialValues": {
+								"type": "array",
+								"description": "The potential values for the select setting.",
+								"items": {
+									"type": ["string", "object"],
+									"description": "A potential value for the select setting.",
+									"allOf": [
+										{
+											"if": {
+												"type": "string"
+											},
+											"then": {
+												"minLength": 1
+											}
+										},
+										{
+											"if": {
+												"type": "object"
+											},
+											"then": {
+												"properties": {
+													"name": {
+														"type": "string",
+														"description": "The name of the potential value.",
+														"minLength": 1
+													},
+													"id": {
+														"type": "string",
+														"description": "The identifier of the potential value.",
+														"minLength": 1
+													}
+												}
+											}
+										}
+									]
+								},
+								"minItems": 1
+							},
+							"default": {
+								"type": "string"
+							}
+						},
+						"required": ["potentialValues"]
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "boolean"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"default": {
+								"type": "boolean"
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "positive_integer"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"default": {
+								"type": "integer",
+								"minimum": 0
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"enum": ["string", "untranslated"]
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"default": {
+								"type": "string"
+							},
+							"min": {
+								"type": "integer",
+								"description": "The minimum length of the string."
+							},
+							"max": {
+								"type": "integer",
+								"description": "The maximum length of the string."
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "color"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"default": {
+								"type": "string",
+								"pattern": "^#([0-9a-fA-F]{2}){1,4}$"
+							},
+							"allowTransparency": {
+								"type": "boolean",
+								"description": "Determines whether the transparency/opacity/alpha value can be changed when choosing a color"
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "color"
+							},
+							"allowTransparency": {
+								"const": false
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"default": {
+								"type": "string",
+								"pattern": "^#([0-9a-fA-F]{2}){1,3}$"
+							}
+						}
+					}
+				},
+				{
+					"if": {
+						"properties": {
+							"type": {
+								"const": "integer"
+							}
+						}
+					},
+					"then": {
+						"properties": {
+							"default": {
+								"type": "integer"
+							},
+							"min": {
+								"type": "integer",
+								"description": "The minimum value of the integer."
+							},
+							"max": {
+								"type": "integer",
+								"description": "The maximum value of the integer."
+							}
+						}
+					}
+				}
+			],
+			"required": ["name", "id", "type", "default"],
+			"additionalProperties": false
 		}
 	},
 	"properties": {
@@ -340,17 +562,7 @@
 			"items": {
 				"type": "string",
 				"description": "A permission.",
-				"enum": ["notifications", "badge", "clipboardWrite"]
-			},
-			"minItems": 1
-		},
-		"persistentScripts": {
-			"type": "array",
-			"description": "You can add persistent scripts by providing a \"persistentScripts\" array conformed of JS files (e.g. [\"example.js\"]).",
-			"items": {
-				"type": "string",
-				"description": "The path to the persistent script.",
-				"pattern": "\\.js$"
+				"enum": ["notifications", "clipboardWrite"]
 			},
 			"minItems": 1
 		},
@@ -408,219 +620,69 @@
 			"type": "array",
 			"description": "The \"settings\" object allow the addon's users to specify settings in Scratch Addons' settings panel. Inside your persistent scripts and userscripts, you can then access those settings with the \"addon.settings\" API.\nSpecify an \"settings\" property and provide an array of setting objects.",
 			"items": {
-				"type": "object",
-				"properties": {
-					"name": {
-						"type": "string",
-						"description": "The name of the setting.",
-						"minLength": 1
-					},
-					"id": {
-						"type": "string",
-						"description": "The identifier of the setting to get the specified value from your code.",
-						"minLength": 1
-					},
-					"type": {
-						"type": "string",
-						"description": "The type of the setting",
-						"enum": ["boolean", "positive_integer", "string", "select", "color", "integer"],
-						"minLength": 1
-					},
-					"default": {
-						"type": ["boolean", "integer", "string"],
-						"description": "The default value of the setting.",
-						"minLength": 1
-					},
-					"potentialValues": {},
-					"min": {},
-					"max": {},
-					"allowTransparency": {},
-					"if": {
-						"$ref": "#/definitions/if"
-					}
-				},
-				"allOf": [
+				"anyOf": [
 					{
-						"if": {
-							"properties": { 
-								"type": { 
-									"const": "select" 
-								} 
-							}
-						},
-						"then": {
-							"properties": {
-								"potentialValues": {
-									"type": "array",
-									"description": "The potential values for the select setting.",
-									"items": {
-										"type": ["string", "object"],
-										"description": "A potential value for the select setting.",
-										"allOf": [
-											{
-												"if": {
-													"type": "string" 
-												},
-												"then": {
-													"minLength": 1
-												}
-											},
-											{
-												"if": {
-													"type": "object" 
-												},
-												"then": {
-													"properties": {
-														"name": {
-															"type": "string",
-															"description": "The name of the potential value.",
-															"minLength": 1
-														},
-														"id": {
-															"type": "string",
-															"description": "The identifier of the potential value.",
-															"minLength": 1
-														}
-													}
-												}
-											}
-										]
-									},
-									"minItems": 1
-								},
-								"default": {
-									"type": "string"
+						"$ref": "#/definitions/tableNestableSettings"
+					},
+					{
+						"type": "object",
+						"description": "A table setting.",
+						"properties": {
+							"name": {
+								"type": "string",
+								"description": "The name of the setting.",
+								"minLength": 1
+							},
+							"id": {
+								"type": "string",
+								"description": "The identifier of the setting to get the specified value from your code.",
+								"minLength": 1
+							},
+							"type": {
+								"type": "string",
+								"const": "table"
+							},
+							"default": {
+								"type": "array",
+								"description": "The array that contains default table items.",
+								"items": {
+									"$ref": "#/definitions/serializedTableNestableSettings"
 								}
 							},
-							"required": ["potentialValues"]
-						}
-					},
-					{
-						"if": {
-							"properties": { 
-								"type": { 
-									"const": "boolean" 
-								} 
-							}
-						},
-						"then": {
-							"properties": {
-								"default": {
-									"type": "boolean"
+							"if": {
+								"$ref": "#/definitions/if"
+							},
+							"row": {
+								"type": "array",
+								"description": "The rows of the table. The ordering is used in default and presets.",
+								"items": {
+									"$ref": "#/definitions/tableNestableSettings"
+								},
+								"minItems": 1
+							},
+							"presets": {
+								"type": "array",
+								"description": "The table presets.",
+								"items": {
+									"type": "object",
+									"description": "The table preset.",
+									"properties": {
+										"name": {
+											"type": "string"
+										},
+										"values": {
+											"$ref": "#/definitions/serializedTableNestableSettings"
+										}
+									},
+									"additionalProperties": false,
+									"required": ["name", "values"]
 								}
 							}
-						}
-					},
-					{
-						"if": {
-							"properties": { 
-								"type": { 
-									"const": "positive_integer" 
-								} 
-							}
 						},
-						"then": {
-							"properties": {
-								"default": {
-									"type": "integer",
-									"minimum": 0
-								}
-							}
-						}
-					},
-					{
-						"if": {
-							"properties": { 
-								"type": { 
-									"const": "string" 
-								} 
-							}
-						},
-						"then": {
-							"properties": {
-								"default": {
-									"type": "string",
-									"minLength": 1
-								},
-								"min": {
-									"type": "integer",
-									"description": "The minimum length of the string."
-								},
-								"max": {
-									"type": "integer",
-									"description": "The maximum length of the string."
-								}
-							}
-						}
-					},
-					{
-						"if": {
-							"properties": { 
-								"type": { 
-									"const": "color" 
-								} 
-							}
-						},
-						"then": {
-							"properties": {
-								"default": {
-									"type": "string",
-									"pattern": "^#([0-9a-fA-F]{2}){1,4}$"
-								},
-								"allowTransparency": {
-									"type": "boolean",
-									"description": "Determines whether the transparency/opacity/alpha value can be changed when choosing a color"
-								}
-							}
-						}
-					},
-					{
-						"if": {
-							"properties": {
-								"type": {
-									"const": "color"
-								},
-								"allowTransparency": { 
-									"const": false 
-								} 
-							}
-						},
-						"then": {
-							"properties": {
-								"default": {
-									"type": "string",
-									"pattern": "^#([0-9a-fA-F]{2}){1,3}$"
-								}
-							}
-						}
-					},
-					{
-						"if": {
-							"properties": { 
-								"type": { 
-									"const": "integer" 
-								} 
-							}
-						},
-						"then": {
-							"properties": {
-								"default": {
-									"type": "integer"
-								},
-								"min": {
-									"type": "integer",
-									"description": "The minimum value of the integer."
-								},
-								"max": {
-									"type": "integer",
-									"description": "The maximum value of the integer."
-								}
-							}
-						}
+						"additionalProperties": false,
+						"required": ["name", "id", "type", "row"]
 					}
-				],
-				"required": ["name", "id", "type", "default"],
-				"additionalProperties": false
+				]
 			},
 			"minItems": 1
 		},
@@ -680,9 +742,21 @@
 						"patternProperties": {
 							".": {
 								"description": "The preset value of the setting.",
-								"type": ["boolean", "integer", "string"]
+								"anyOf": [
+									{
+										"$ref": "#/definitions/serializedTableNestableSettings"
+									},
+									{
+										"type": "array",
+										"items": {
+											"$ref": "#/definitions/serializedTableNestableSettings"
+										},
+										"minItems": 1
+									}
+								]
 							}
-						}
+						},
+						"minProperties": 1
 					}
 				},
 				"required": ["name", "id", "values"],
