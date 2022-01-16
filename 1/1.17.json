@@ -630,8 +630,26 @@
 						"type": "string",
 						"description": "The link relevant to the credit.",
 						"pattern": "^https?:\\/\\/?(?:[a-z0-9-]+\\.)*[0-9a-z_-]+(?:\\.[a-z]+)+\\/.*$"
+					},
+					"id": {
+						"type": "string",
+						"description": "The ID for the credit. Required if note is in use."
+					},
+					"note": {
+						"type": "string",
+						"description": "The note for the credit."
 					}
 				},
+				"allOf": [
+					{
+						"if": {
+							"required": ["note"]
+						},
+						"then": {
+							"required": ["id"]
+						}
+					}
+				],
 				"required": ["name"],
 				"additionalProperties": false
 			},
