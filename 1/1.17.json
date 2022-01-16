@@ -308,6 +308,7 @@
 					"community",
 					"editor",
 					"popup",
+					"player",
 					"theme",
 					"beta",
 					"danger",
@@ -317,7 +318,6 @@
 					"easterEgg",
 					"codeEditor",
 					"costumeEditor",
-					"projectPlayer",
 					"editorMenuBar",
 					"projectPage",
 					"profiles",
@@ -329,7 +329,8 @@
 				"enum": [
 					"community",
 					"editor",
-					"popup"
+					"popup",
+					"player"
 				]
 			},
 			"minItems": 1
