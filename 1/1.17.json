@@ -212,6 +212,31 @@
 						}
 					},
 					"required": ["h", "s", "v"]
+				},
+				{
+					"type": "object",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of the manipulator.",
+							"const": "map"
+						},
+						"source": {
+							"description": "The source that provides the color.",
+							"$ref": "#/definitions/cssManipulator"
+						},
+						"options": {
+							"type": "object",
+							"description": "The possible options.",
+							"minProperties": 1,
+							"patternProperties": {
+								".*": {
+									"$ref": "#/definitions/cssManipulator"
+								}
+							}
+						}
+					},
+					"required": ["source", "options"]
 				}
 			]
 		},
@@ -686,7 +711,7 @@
 						"type": "object",
 						"description": "An object containing preset values of the settings.",
 						"patternProperties": {
-							".": {
+							".*": {
 								"description": "The preset value of the setting.",
 								"type": ["boolean", "integer", "string"]
 							}
