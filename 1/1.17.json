@@ -43,11 +43,25 @@
 						},
 						"true": {
 							"description": "The value in case the source is truthy.",
-							"type": ["object", "string", "number", "null"]
+							"anyOf": [
+								{
+									"$ref": "#/definitions/cssManipulator"
+								},
+								{
+									"type": "null"
+								}
+							]
 						},
 						"false": {
 							"description": "The value in case the source is falsy.",
-							"type": ["object", "string", "number", "null"]
+							"anyOf": [
+								{
+									"$ref": "#/definitions/cssManipulator"
+								},
+								{
+									"type": "null"
+								}
+							]
 						}
 					},
 					"required": ["source", "true", "false"]
