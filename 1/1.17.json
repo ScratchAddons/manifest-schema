@@ -936,7 +936,7 @@
 					},
 					"dropNull": {
 						"type": "boolean",
-						"description": "Whethe to drop the variable entirely when it evaluates to null."
+						"description": "Whether to drop the variable entirely when it evaluates to null."
 					}
 				},
 				"required": ["name", "value"]
