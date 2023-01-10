@@ -725,6 +725,14 @@
 							"if": {
 								"$ref": "#/definitions/if"
 							},
+							"disableEditingText": {
+								"type": "boolean",
+								"description": "Disable editing text inputs."
+							},
+							"disableAddingPresets": {
+								"type": "boolean",
+								"description": "Hide button to load and add new presets."
+							},
 							"row": {
 								"type": "array",
 								"description": "The rows of the table. The ordering is used in default and presets.",
