@@ -65,11 +65,11 @@ The versioning consist of the major version and the minor version. The major ver
 
 In most times, you bump the minor once there is a new feature, but for Scratch Addons, **you only bump the minor version when the new minor version of Scratch Addons requires changes on the schema**.
 
-For example, if a new feature on a certain minor version of SA require changes on the schema, you have to bump it. 
+For example, if a new feature (or multiple) on a certain minor version of SA require changes on the schema, you have to increment the minor version by 1. 
 
 This means that **there's no need to bump** if there are **no necessary changes** on the schema on a certain minor version of SA. This also means that the schema's versioning is seperate from SA's versioning. (e.q. SA 1.6.x doesn't need changes on the schema, so bumping is skipped and SA 1.7.x gets the previous schema version)
 
-If the changes are **not necessarily needed** (as in, the changes are still in line with the behavior of the earliest supported minor version of SA, such as bug/typo fixes, description changes), then it also **doesn't need a bump** on the minor version.
+If the changes are **patch-level** (or **not necessarily needed**), such as bug/typo fixes and description changes, then it also **doesn't need a bump** on the minor version.
 
 To bump a minor version, copy the latest schema and rename it to the new version number, along with replacing any instance of the old version number with the new one. It is suggested to commit this separately, before doing the relevant changes.
 
