@@ -42,7 +42,7 @@ jobs:
         run: node script/index.js
 
       - name: Generate token 
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         id: generate-token
         with:
           app_id: ${{ secrets.BOT_APP_ID }}
