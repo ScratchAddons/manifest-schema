@@ -600,9 +600,26 @@
 								"description": "The maximum value of the decimal."
 							},
 							"step": {
-								"type": "number",
+								"type": ["number", "string"],
 								"description": "The step value of the decimal.",
-								"minimum": 0
+								"allOf": [
+									{
+										"if": {
+											"type": "number"
+										},
+										"then": {
+											"minimum": 0
+										}
+									},
+									{
+										"if": {
+											"type": "string"
+										},
+										"then": {
+											"required": ["any"]
+										}
+									}
+								]
 							}
 						}
 					}
