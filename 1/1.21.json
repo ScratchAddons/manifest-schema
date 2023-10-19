@@ -616,7 +616,7 @@
 											"type": "string"
 										},
 										"then": {
-											"required": ["any"]
+											"enum": ["any"]
 										}
 									}
 								]
