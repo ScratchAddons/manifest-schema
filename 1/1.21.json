@@ -384,17 +384,16 @@
 				"type": {
 					"type": "string",
 					"description": "The type of the setting",
-					"enum": ["boolean", "positive_integer", "string", "select", "color", "integer", "untranslated", "decimal"],
+					"enum": ["boolean", "positive_integer", "string", "select", "color", "integer", "untranslated"],
 					"minLength": 1
 				},
 				"default": {
-					"type": ["boolean", "integer", "string", "number"],
+					"type": ["boolean", "integer", "string"],
 					"description": "The default value of the setting."
 				},
 				"potentialValues": {},
 				"min": {},
 				"max": {},
-				"step": {},
 				"allowTransparency": {},
 				"if": {
 					"$ref": "#/definitions/if"
@@ -574,35 +573,6 @@
 							"max": {
 								"type": "integer",
 								"description": "The maximum value of the integer."
-							}
-						}
-					}
-				},
-				{
-					"if": {
-						"properties": {
-							"type": {
-								"const": "decimal"
-							}
-						}
-					},
-					"then": {
-						"properties": {
-							"default": {
-								"type": "number"
-							},
-							"min": {
-								"type": "number",
-								"description": "The minimum value of the decimal."
-							},
-							"max": {
-								"type": "number",
-								"description": "The maximum value of the decimal."
-							},
-							"step": {
-								"type": "number",
-								"description": "The step value of the decimal.",
-								"minimum": 0
 							}
 						}
 					}
