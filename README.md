@@ -1,10 +1,12 @@
-# manifest-schema
+# Scratch Addons' addon manifest
 
 [![Dist. Branch Update workflow status](https://img.shields.io/github/actions/workflow/status/ScratchAddons/manifest-schema/update-dist.yml?label=dist&style=flat-square)](https://github.com/ScratchAddons/manifest-schema/actions/workflows/update-dist.yml)
+[![View on json-schema.app](https://img.shields.io/badge/view-json--schema.app-blue?style=flat-square)](https://json-schema.app/view/%23?url=https%3A%2F%2Fraw.githubusercontent.com%2FScratchAddons%2Fmanifest-schema%2Fdist%2Fschema.json)
 
-This repository hosts the schema for Scratch Addons' addon manifest.
+This repository hosts the schema for Scratch Addons' addon manifest. For more information, there's [the documentation for the manifest](https://scratchaddons.com/docs/reference/addon-manifest/).
 
-[View the changelog](https://github.com/ScratchAddons/manifest-schema/wiki/Changelog).
+- [View the changelog](https://github.com/ScratchAddons/manifest-schema/wiki/Changelog)
+- [View the schema on json-schema.app](https://json-schema.app/view/%23?url=https%3A%2F%2Fraw.githubusercontent.com%2FScratchAddons%2Fmanifest-schema%2Fdist%2Fschema.json)
 
 ## How-to
 
