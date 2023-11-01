@@ -384,7 +384,7 @@
 				"type": {
 					"type": "string",
 					"description": "The type of the setting",
-					"enum": ["boolean", "positive_integer", "string", "select", "color", "integer", "untranslated", "decimal"],
+					"enum": ["boolean", "positive_integer", "string", "select", "color", "integer", "untranslated", "number"],
 					"minLength": 1
 				},
 				"default": {
@@ -582,7 +582,7 @@
 					"if": {
 						"properties": {
 							"type": {
-								"const": "decimal"
+								"const": "number"
 							}
 						}
 					},
@@ -593,15 +593,15 @@
 							},
 							"min": {
 								"type": "number",
-								"description": "The minimum value of the decimal."
+								"description": "The minimum value of the number."
 							},
 							"max": {
 								"type": "number",
-								"description": "The maximum value of the decimal."
+								"description": "The maximum value of the number."
 							},
 							"step": {
 								"type": ["number", "string"],
-								"description": "The step value of the decimal.",
+								"description": "The step value of the number.",
 								"allOf": [
 									{
 										"if": {
