@@ -388,12 +388,13 @@
 					"minLength": 1
 				},
 				"default": {
-					"type": ["boolean", "integer", "string"],
+					"type": ["boolean", "integer", "string", "number"],
 					"description": "The default value of the setting."
 				},
 				"potentialValues": {},
 				"min": {},
 				"max": {},
+				"step": {},
 				"allowTransparency": {},
 				"if": {
 					"$ref": "#/definitions/if"
