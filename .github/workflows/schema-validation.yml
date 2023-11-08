@@ -1,0 +1,41 @@
+name: Schema Validation
+
+on:
+  push:
+    paths:
+      - '*/*.json'
+  pull_request:
+    paths:
+      - '*/*.json'
+  workflow_dispatch:
+
+jobs:
+  sv:
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Find changed files (push, PR)
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        id: changed
+        uses: ScratchAddons/changed-files@master
+        with:
+          pattern: '[/^]+/[/^]+\.json$'
+          repo-token: ${{ github.token }}
+
+      - name: Validate .json with schema (changed)
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        uses: ScratchAddons/validate-json-action@master
+        with:
+          jsons: |
+            ${{ steps.changed.outputs.files_created }}
+            ${{ steps.changed.outputs.files_updated }}
+
+      - name: Validate .json with schema (all)
+        if: "! (github.event_name == 'push' || github.event_name == 'pull_request')"
+        uses: ScratchAddons/validate-json-action@master
+        with:
+          jsons: '*/*.json'

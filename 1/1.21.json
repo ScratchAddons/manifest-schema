@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.19.json",
+	"$id": "https://raw.githubusercontent.com/ScratchAddons/manifest-schema/master/1/1.21.json",
 	"title": "Scratch Addons addon manifest",
 	"description": "The manifest that describes an addon.",
 	"type": "object",
@@ -388,13 +388,12 @@
 					"minLength": 1
 				},
 				"default": {
-					"type": ["boolean", "integer", "string", "number"],
+					"type": ["boolean", "integer", "string"],
 					"description": "The default value of the setting."
 				},
 				"potentialValues": {},
 				"min": {},
 				"max": {},
-				"step": {},
 				"allowTransparency": {},
 				"if": {
 					"$ref": "#/definitions/if"
