@@ -171,7 +171,7 @@
 			"oneOf": [
 				{
 					"type": "string",
-					"description": "A match rule for any URL on Scratch origin. The script will execute will execute in all pages.",
+					"description": "A match rule for any URL on Scratch origin. The script will execute in all pages.",
 					"const": "*"
 				},
 				{
