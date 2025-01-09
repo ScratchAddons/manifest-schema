@@ -376,6 +376,11 @@
 					"description": "The name of the setting.",
 					"minLength": 1
 				},
+				"description": {
+					"type": "string",
+					"description": "The description of the setting shown in a tooltip.",
+					"minLength": 1
+				},
 				"id": {
 					"type": "string",
 					"description": "The identifier of the setting to get the specified value from your code.",
