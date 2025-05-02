@@ -923,20 +923,10 @@
 						"type": "boolean",
 						"description": "Determines whether to show the fullscreen button.",
 						"default": false
-					},
-					"html": {
-						"type": "string",
-						"description": "The filename of the popup page.",
-						"minLength": 1
-					},
-					"script": {
-						"type": "string",
-						"description": "The filename of the popup script.",
-						"minLength": 1
 					}
 				},
 				"minItems": 1,
-				"required": ["icon", "name", "html", "script"]
+				"required": ["icon", "name"]
 			}
 		},
 		"dynamicDisable": {
@@ -1054,6 +1044,15 @@
 			},
 			"additionalProperties": false,
 			"required": ["version"]
+		},
+		"relatedAddons": {
+			"type": "array",
+			"description": "The list of related addons.",
+			"items": {
+				"type": "string",
+				"description": "An addon ID.",
+				"pattern": "^[a-z0-9-]+$"
+			}
 		}
 	},
 	"required": ["name", "description", "tags", "versionAdded"],
