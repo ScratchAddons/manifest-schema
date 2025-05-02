@@ -1047,7 +1047,7 @@
 		},
 		"relatedAddons": {
 			"type": "array",
-			"description": "The list of related addons.",
+			"description": "The list of related addons displayed on the settings page.",
 			"items": {
 				"type": "string",
 				"description": "An addon ID.",
