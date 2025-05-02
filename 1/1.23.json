@@ -989,16 +989,9 @@
 			"pattern": "^1\\.\\d+\\.\\d+$"
 		},
 		"addonPreview": {
-			"type": "object",
-			"description": "The preview used for the addon.",
-			"properties": {
-				"type": {
-					"type": "string",
-					"description": "The type of the preview."
-				}
-			},
-			"required": ["type"],
-			"additionalProperties": false
+			"type": "boolean",
+			"description": "Whether the addon has a preview.",
+			"default": false
 		},
 		"presetPreview": {
 			"type": "object",
@@ -1006,7 +999,8 @@
 			"properties": {
 				"type": {
 					"type": "string",
-					"description": "The type of the preview."
+					"description": "The type of the preview.",
+					"enum": ["palette", "stage-monitor-preset"]
 				},
 				"colors": {}
 			},
